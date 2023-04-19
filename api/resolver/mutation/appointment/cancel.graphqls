@@ -1,0 +1,18 @@
+extend type Mutation {
+	"""
+	Cancel an appointment. Customers and employees can cancel their own appointments and company managers can cancel
+	all appointments in a branch.
+	"""
+	cancelAppointment(
+		input: CancelAppointmentInput!
+		language: String
+	): CancelAppointmentPayload!
+}
+
+input CancelAppointmentInput {
+	id: ID!
+}
+
+type CancelAppointmentPayload {
+	appointment: Appointment!
+}

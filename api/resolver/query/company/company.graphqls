@@ -1,0 +1,10 @@
+extend type Query {
+	company(id: ID!, language: String): Company!
+	companies(language: String): CompanyConnection!
+	relatedCompanies(email: String!, password: String!, language: String): RelatedCompanies!
+}
+
+type RelatedCompanies {
+	companies: [Company!]!
+	isAdmin: Boolean!
+}

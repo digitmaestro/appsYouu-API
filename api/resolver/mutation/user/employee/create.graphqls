@@ -1,0 +1,20 @@
+extend type Mutation {
+	"Creates an employee. Can only be invoked by company managers."
+	createEmployee(
+		input: CreateEmployeeInput!
+	): CreateEmployeePayload!
+}
+
+input CreateEmployeeInput {
+	branch: ID!
+	data: CreateUserData!
+	employee: CreateEmployeeData!
+}
+
+input CreateEmployeeData {
+	workingHours: [WorkingHoursInput!]
+}
+
+type CreateEmployeePayload {
+	employee: Employee!
+}

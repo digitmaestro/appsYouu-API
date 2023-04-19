@@ -1,0 +1,18 @@
+extend type Mutation {
+	"Updates an email template. Can only be invoked by an administrator."
+	updateEmailTemplate(input: UpdateEmailTemplateInput!, language: String): UpdateEmailTemplatePayload!
+}
+
+input UpdateEmailTemplateInput {
+	id: ID!
+	patch: UpdateEmailTemplatePatch!
+}
+
+input UpdateEmailTemplatePatch {
+	title: String
+	content: String
+}
+
+type UpdateEmailTemplatePayload {
+	template: EmailTemplate!
+}

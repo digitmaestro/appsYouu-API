@@ -1,0 +1,26 @@
+interface IProductReview {
+	product: Product!
+}
+
+type ProductReview implements Node & IReview & IProductReview {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	type: ReviewType!
+	stars: Float!
+	title: String!
+	text: String!
+	status: ReviewStatus!
+
+	"""
+	Each review has to be made by a customer
+	"""
+	customer: Customer!
+	
+	product: Product!
+}
+
+type ProductReviewConnection {
+	nodes: [ProductReview!]!
+}

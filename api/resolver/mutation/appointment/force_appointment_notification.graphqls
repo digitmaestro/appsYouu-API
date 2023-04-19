@@ -1,0 +1,7 @@
+extend type Mutation {
+	forceAppointmentNotification(input: ForceAppointmentNotificationInput): NotificationPayload!
+}
+
+input ForceAppointmentNotificationInput {
+	appointment: ID!
+}

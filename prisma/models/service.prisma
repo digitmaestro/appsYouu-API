@@ -1,0 +1,21 @@
+type Service {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	name: LocalizedString! @relation(name: "LocalizedServiceName", link: INLINE)
+	desc: LocalizedString! @relation(name: "LocalizedServiceDescription", link: INLINE)
+	price: Int!
+
+	"The duration of this service in minutes."
+	duration: Int!
+	image: String
+	genderTarget: GenderTarget! @default(value: ANY)
+	attributes: [ProductServiceAttribute!]! @relation(name: "ServiceAttributeParent", onDelete: CASCADE)
+
+	branch: Branch! @relation(link: INLINE)
+	
+	reviews: [Review!]! @relation(name: "ReviewToService", onDelete: CASCADE)
+
+	deleted: Boolean! @default(value: false)
+}

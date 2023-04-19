@@ -1,0 +1,9 @@
+extend type Mutation {
+	notifyAllCustomers(input: NotifyAllCustomersInput!): NotificationsPayload
+}
+
+input NotifyAllCustomersInput {
+	title: String!
+	text: String!
+	company: ID
+}

@@ -1,0 +1,44 @@
+type Appointment {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	desc: LocalizedString! @relation(link: INLINE)
+	start: DateTime!
+	end: DateTime!
+
+	"The appointment price. It's saved as a field so product or service updates won't affect this."
+	price: Int!
+
+	status: AppointmentStatus!
+	"Flag to indicate whether the customer was notified about his upcoming appointment."
+	customerNotified: Boolean @default(value: false)
+	customerNotifiedAnHourBefore: Boolean @default(value: false)
+
+	"An internal note only accessable by staff."
+	note: String
+	beforeImage: String
+	afterImage: String
+
+	branch: Branch! @relation(link: INLINE)
+	employee: User! @relation(name: "EmployeeToAppointment", link: INLINE)
+	customer: User! @relation(name: "CustomerToAppointment", link: INLINE)
+
+	products: [AppointmentProductLink!]! @relation(onDelete: CASCADE)
+	services: [AppointmentServiceLink!]! @relation(onDelete: CASCADE)
+	
+	review: Review @relation(name: "ReviewToAppointment", onDelete: CASCADE)
+}
+
+type AppointmentProductLink {
+	id: ID! @id
+	appointment: Appointment! @relation(link: INLINE)
+	product: Product! @relation(link: INLINE)
+	count: Int!
+}
+
+type AppointmentServiceLink {
+	id: ID! @id
+	appointment: Appointment! @relation(link: INLINE)
+	service: Service! @relation(link: INLINE)
+}

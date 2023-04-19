@@ -1,0 +1,8 @@
+extend type Query {
+	favorites(language: String): FavoritesPayload!
+}
+
+type FavoritesPayload {
+	products: ProductConnection!
+	services: ServiceConnection!
+}

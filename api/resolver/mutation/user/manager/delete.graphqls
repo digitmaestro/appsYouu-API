@@ -1,0 +1,12 @@
+extend type Mutation {
+	"Deletes a manager. Can only be invoked by a manager of the same company or an administrator."
+	deleteManager(input: DeleteManagerInput!): DeleteManagerPayload!
+}
+
+input DeleteManagerInput {
+	id: ID!
+}
+
+type DeleteManagerPayload {
+	manager: Manager!
+}

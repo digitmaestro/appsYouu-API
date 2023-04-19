@@ -1,0 +1,14 @@
+extend type Mutation {
+	login(input: LoginInput!): LoginPayload!
+}
+
+input LoginInput {
+	email: String!
+	password: String!
+	company: ID
+}
+
+type LoginPayload implements AuthPayload {
+	session: Session!
+	user: IUser!
+}

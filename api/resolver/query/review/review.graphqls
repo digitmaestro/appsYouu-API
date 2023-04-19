@@ -1,0 +1,28 @@
+extend type Query {
+	reviews(input: ReviewInput!, language: String): ReviewConnection!
+}
+
+input ReviewInput {
+	"Returns all reviews from a given customer. By default returns reviews for viewer."
+	customer: ID
+	status: [ReviewStatus!]
+	type: [ReviewType!]
+	order: ReviewOrderByInput # similiar to AppointmentOrderByInput with fields createdAt, updatedAt
+	company: ID
+}
+
+type ReviewConnection {
+  nodes: [IReview!]!
+}
+
+input ReviewOrderByInput {
+	field: ReviewOrderByFields!
+	direction: OrderByDirectionInput!
+}
+
+enum ReviewOrderByFields {
+	createdAt
+	updatedAt
+	stars
+	title
+}

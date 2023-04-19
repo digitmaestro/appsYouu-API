@@ -1,0 +1,26 @@
+extend type Mutation {
+	"Creates a product. Can only be invoked by a company manager."
+	createProduct(
+		input: CreateProductInput!
+		language: String
+	): CreateProductPayload!
+}
+
+input CreateProductInput {
+	branch: ID!
+	data: CreateProductData!
+}
+
+input CreateProductData {
+	name: String!
+	desc: String
+	price: Float!
+	capacity: String
+	category: String
+	image: Upload
+	attributes: [ProductServiceAttributeInput!]
+}
+
+type CreateProductPayload {
+	product: Product!
+}

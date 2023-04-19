@@ -1,0 +1,12 @@
+extend type Mutation {
+	"Deletes a news item. Can only be invoked by a company manager."
+	deleteNews(input: DeleteNewsInput!, language: String): DeleteNewsPayload!
+}
+
+input DeleteNewsInput {
+	id: ID!
+}
+
+type DeleteNewsPayload {
+	news: News!
+}

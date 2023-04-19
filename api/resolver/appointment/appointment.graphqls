@@ -1,0 +1,63 @@
+type Appointment implements Node {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	desc: String!
+	start: String!
+	end: String
+	price: Price!
+
+	"The appointment duration in minutes. Gets automatically calculated from the appointment's start and end time."
+	duration: Int
+
+	status: AppointmentStatus!
+
+	"An internal note only accessable by staff."
+	note: String
+	beforeImage: Image
+	afterImage: Image
+
+	employee: Employee!
+	customer: Customer!
+	
+	review: AppointmentReview
+	viewerReview: AppointmentReview
+	viewerCanReview: Boolean
+	
+	products: [AppointmentProduct!]!
+	services: [Service!]!
+}
+
+type AppointmentProduct {
+	item: Product!
+	count: Int!
+}
+
+type AppointmentConnection {
+	nodes: [Appointment!]!
+}
+
+input AppointmentInput {
+	"Order by field and direction."
+	order: AppointmentOrderByInput
+
+	"Filter by status."
+	status: [AppointmentStatus!]
+
+	start: DateFilter
+	end: DateFilter
+}
+
+input AppointmentOrderByInput {
+	field: AppointmentOrderByFields!
+	direction: OrderByDirectionInput!
+}
+
+enum AppointmentOrderByFields {
+	createdAt
+	updatedAt
+	start
+	price
+	status
+}

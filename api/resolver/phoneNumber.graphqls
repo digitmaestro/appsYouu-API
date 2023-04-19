@@ -1,0 +1,5 @@
+"A phoneNumber object, providing fields for raw usage and for the a-tag for HTML usage."
+type PhoneNumber {
+	href: String!
+	raw: String!
+}

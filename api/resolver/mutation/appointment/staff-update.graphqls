@@ -1,0 +1,22 @@
+extend type Mutation {
+	staffUpdateAppointment(
+		input: StaffUpdateAppointmentInput!
+		language: String
+	): StaffUpdateAppointmentPayload!
+}
+
+input StaffUpdateAppointmentInput {
+	"The appointment ID."
+	id: ID!
+
+	patch: StaffUpdateAppointmentPatch!
+}
+
+input StaffUpdateAppointmentPatch {
+	note: String
+	desc: String
+}
+
+type StaffUpdateAppointmentPayload {
+	appointment: Appointment!
+}

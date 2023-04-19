@@ -1,0 +1,10 @@
+type ProductServiceAttribute {
+	id: ID! @id
+	
+	service: Service @relation(name: "ServiceAttributeParent", link: INLINE)
+	product: Product @relation(name: "ProductAttributeParent", link: INLINE)
+	
+	key: String!
+	name: LocalizedString! @relation(name: "LocalizedAttributeName", link: INLINE)
+	value: LocalizedString! @relation(name: "LocalizedAttributeValue", link: INLINE)
+}

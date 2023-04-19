@@ -1,0 +1,22 @@
+type Product implements Node {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	name: String!
+	desc: String
+	price: Price!
+	capacity: String
+	category: String
+	image: Image
+	attributes: [ProductServiceAttribute!]!
+	
+	reviews: ProductReviewConnection!
+	viewerReview: ProductReview
+	viewerCanReview: Boolean
+	reviewAggregations: ReviewAggregations
+}
+
+type ProductConnection {
+	nodes: [Product!]!
+}

@@ -1,0 +1,7 @@
+type Favorite {
+	id: ID! @id
+
+	user: User! @relation(link: INLINE)
+	product: Product @relation(link: INLINE)
+	service: Service @relation(link: INLINE)
+}

@@ -1,0 +1,32 @@
+type Branch {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	name: LocalizedString! @relation(name: "LocalizedBranchName", link: INLINE)
+	phoneNumber: String
+	welcomeMessage: LocalizedString! @relation(name: "LocalizedBranchWelcomeMessage", link: INLINE)
+	address: String
+	image: String
+	websiteUrl: String!
+	navigationLink: String
+	sharingRedirectUrl: String
+	imprint: String!
+
+	company: Company! @relation(link: INLINE)
+	employees: [User!]! @relation(name: "EmployeeToBranch", onDelete: CASCADE)
+	openingHours: [BranchOpeningHour!]!
+	news: [News!]! @relation(name: "NewsToBranch", onDelete: CASCADE)
+	
+	logo: String
+	appTheme: String
+	
+	smtpSendHost: String
+	smtpSendPort: String
+	smtpUsername: String
+	smtpPassword: String
+	fromEmail: String
+	
+	mailchimpApiKey: String
+	mailchimpListId: String
+}

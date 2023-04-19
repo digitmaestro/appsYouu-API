@@ -1,0 +1,6 @@
+"A reviewAggregations object, providing aggregated metrics for reviews."
+type ReviewAggregations {
+	totalCount: Int!
+	averageRating: Float!
+	countPerStar: [Int!]!
+}

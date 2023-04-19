@@ -1,0 +1,19 @@
+extend type Mutation {
+	"Updates a customer. Can only be invoked by employees or company managers."
+	updateCustomer(input: UpdateCustomerInput!): UpdateCustomerPayload!
+}
+
+input UpdateCustomerInput {
+	id: ID!
+	patchUser: UpdateUserPatch!
+	patchCustomer: UpdateCustomerPatch!
+}
+
+type UpdateCustomerPayload {
+	customer: Customer!
+}
+
+input UpdateCustomerPatch {
+	note: String
+	allowReviewSharing: Boolean
+}

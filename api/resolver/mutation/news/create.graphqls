@@ -1,0 +1,21 @@
+extend type Mutation {
+	"Creates a news item. Can only be invoked by a company manager."
+	createNews(
+		input: CreateNewsInput!
+		language: String
+	): CreateNewsPayload!
+}
+
+input CreateNewsInput {
+	branch: ID!
+	data: CreateNewsData!
+}
+
+input CreateNewsData {
+	title: String
+	image: Upload
+}
+
+type CreateNewsPayload {
+	news: News!
+}

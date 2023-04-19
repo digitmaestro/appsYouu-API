@@ -1,0 +1,18 @@
+extend type Mutation {
+	"Updates an employee. Can only be invoked by company managers."
+	updateEmployee(input: UpdateEmployeeInput!): UpdateEmployeePayload!
+}
+
+input UpdateEmployeeInput {
+	id: ID!
+	patch: UpdateUserPatch!
+	patchEmployee: UpdateEmployeePatch!
+}
+
+input UpdateEmployeePatch {
+	workingHours: [WorkingHoursInput!]
+}
+
+type UpdateEmployeePayload {
+	employee: Employee!
+}

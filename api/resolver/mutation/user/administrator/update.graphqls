@@ -1,0 +1,13 @@
+extend type Mutation {
+	"Updates a administrator. Can only be invoked by an administrator."
+	updateAdministrator(input: UpdateAdministratorInput!): UpdateAdministratorPayload!
+}
+
+input UpdateAdministratorInput {
+	id: ID!
+	patch: UpdateUserPatch!
+}
+
+type UpdateAdministratorPayload {
+	administrator: Administrator!
+}

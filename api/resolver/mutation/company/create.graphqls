@@ -1,0 +1,28 @@
+extend type Mutation {
+	"Creates a company. Can only be invoked by an administrator."
+	createCompany(
+		input: CreateCompanyInput!
+		language: String
+	): CreateCompanyPayload!
+}
+
+input CreateCompanyInput {
+	data: CreateCompanyData!
+}
+
+input CreateCompanyData {
+	name: String
+	aliases: [String!]
+	customUrls: [String!]
+	sharingRedirectUrl: String
+	logo: Upload
+	appTheme: String
+	pwaShortName: String!
+	pwaIcon: Upload
+	pwaThemeColor: String!
+	pwaBackgroundColor: String!
+}
+
+type CreateCompanyPayload {
+	company: Company!
+}

@@ -1,0 +1,33 @@
+extend type Query {
+	"""
+	Get a staff member by ID. When no ID is provided, it defaults to the viewer, but it must be a user of type employee or manager.
+	Only company managers can provide an optional ID.
+	"""
+	staffMember(id: ID): IStaff!
+
+	"""
+	Get staff members. Can only be invoked by user type employee or manager.
+	"""
+	staffMembers(input: StaffMemberInput!): StaffMemberConnection!
+
+	"""
+	Get staff members visible to the public.
+	"""
+	publicStaffMembers(input: StaffMemberInput!): PublicStaffMemberConnection!
+}
+
+input StaffMemberInput {
+	"Returns all staff members from a given branch."
+	branch: ID
+
+	"Returns all staff members from a given company."
+	company: ID
+}
+
+type StaffMemberConnection {
+	nodes: [IStaff!]!
+}
+
+type PublicStaffMemberConnection {
+	nodes: [IPublicStaff!]!
+}

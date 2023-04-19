@@ -1,0 +1,4 @@
+interface AuthPayload {
+	session: Session!
+	user: IUser!
+}

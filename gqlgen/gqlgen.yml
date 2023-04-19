@@ -1,0 +1,189 @@
+schema:
+  - "api/resolver/**/*.graphqls"
+  - gqlgen/*.graphqls
+  - prisma/*.graphqls
+exec:
+  filename: gqlgen/gqlgen_gen.go
+  package: gqlgen
+model:
+  filename: gqlgen/models_gen.go
+  package: gqlgen
+models:
+  # enums
+  Gender:
+    model: github.com/steebchen/keskin-api/prisma.Gender
+  GenderTarget:
+    model: github.com/steebchen/keskin-api/prisma.GenderTarget
+  UserType:
+    model: github.com/steebchen/keskin-api/prisma.UserType
+  DayOfWeek:
+    model: github.com/steebchen/keskin-api/prisma.DayOfWeek
+  AppointmentStatus:
+    model: github.com/steebchen/keskin-api/prisma.AppointmentStatus
+  ReviewType:
+    model: github.com/steebchen/keskin-api/prisma.ReviewType
+  ReviewStatus:
+    model: github.com/steebchen/keskin-api/prisma.ReviewStatus
+
+  # models
+  Appointment:
+    model: github.com/steebchen/keskin-api/prisma.Appointment
+    fields:
+      note:
+        resolver: true
+  Session:
+    model: github.com/steebchen/keskin-api/prisma.Session
+  Branch:
+    model: github.com/steebchen/keskin-api/prisma.Branch
+    fields:
+      smtpSendHost:
+        resolver: true
+      smtpSendPort:
+        resolver: true
+      smtpUsername:
+        resolver: true
+      smtpPasswort:
+        resolver: true
+      fromEmail:
+        resolver: true
+      mailchimpApiKey:
+        resolver: true
+  Company:
+    model: github.com/steebchen/keskin-api/prisma.Company
+  Product:
+    model: github.com/steebchen/keskin-api/prisma.Product
+    fields:
+      id:
+        resolver: true
+      capacity:
+        resolver: true
+      category:
+        resolver: true
+  Service:
+    model: github.com/steebchen/keskin-api/prisma.Service
+    fields:
+      id:
+        resolver: true
+      genderTarget:
+        resolver: true
+      duration:
+        resolver: true
+  Favorite:
+    model: github.com/steebchen/keskin-api/prisma.Favorite
+  News:
+    model: github.com/steebchen/keskin-api/prisma.News
+  EmailTemplate:
+    model: github.com/steebchen/keskin-api/prisma.EmailTemplate
+  ProductServiceAttribute:
+    model: github.com/steebchen/keskin-api/prisma.ProductServiceAttribute
+
+  # special types inherited from User
+  IUser:
+    model: github.com/steebchen/keskin-api/prisma.IUser
+  IStaff:
+    model: github.com/steebchen/keskin-api/prisma.IStaff
+  IPublicStaff:
+    model: github.com/steebchen/keskin-api/prisma.IPublicStaff
+  Customer:
+    model: github.com/steebchen/keskin-api/prisma.Customer
+    fields:
+      city:
+        resolver: true
+      street:
+        resolver: true
+      notificationToken:
+        resolver: true
+      email:
+        resolver: true
+      zipCode:
+        resolver: true
+      birthday:
+        resolver: true
+      firstName:
+        resolver: true
+      lastName:
+        resolver: true
+      gender:
+        resolver: true
+      id:
+        resolver: true
+      note:
+        resolver: true
+  Employee:
+    model: github.com/steebchen/keskin-api/prisma.Employee
+    fields:
+      city:
+        resolver: true
+      street:
+        resolver: true
+      notificationToken:
+        resolver: true
+      email:
+        resolver: true
+      zipCode:
+        resolver: true
+      birthday:
+        resolver: true
+      firstName:
+        resolver: true
+      lastName:
+        resolver: true
+      gender:
+        resolver: true
+      id:
+        resolver: true
+  Manager:
+    model: github.com/steebchen/keskin-api/prisma.Manager
+    fields:
+      city:
+        resolver: true
+      street:
+        resolver: true
+      notificationToken:
+        resolver: true
+      email:
+        resolver: true
+      zipCode:
+        resolver: true
+      birthday:
+        resolver: true
+      firstName:
+        resolver: true
+      lastName:
+        resolver: true
+      gender:
+        resolver: true
+      id:
+        resolver: true
+  Administrator:
+    model: github.com/steebchen/keskin-api/prisma.Administrator
+    fields:
+      city:
+        resolver: true
+      street:
+        resolver: true
+      notificationToken:
+        resolver: true
+      email:
+        resolver: true
+      zipCode:
+        resolver: true
+      birthday:
+        resolver: true
+      firstName:
+        resolver: true
+      lastName:
+        resolver: true
+      gender:
+        resolver: true
+      id:
+        resolver: true
+
+  IReview:
+    model: github.com/steebchen/keskin-api/prisma.IReview
+  ProductReview:
+    model: github.com/steebchen/keskin-api/prisma.ProductReview
+  ServiceReview:
+    model: github.com/steebchen/keskin-api/prisma.ServiceReview
+  AppointmentReview:
+    model: github.com/steebchen/keskin-api/prisma.AppointmentReview

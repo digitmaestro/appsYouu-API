@@ -1,0 +1,30 @@
+extend type Mutation {
+	"Upsert a branch opening hour. If nothing is set at the beginning, the day defaults to being closed."
+	upsertBranchOpeningHour(input: UpsertBranchOpeningHourInput!): UpsertBranchOpeningHourPayload!
+}
+
+input UpsertBranchOpeningHourInput {
+	"The branch which should be updated."
+	branch: ID!
+
+	patch: UpsertBranchOpeningHourPatch!
+}
+
+input UpsertBranchOpeningHourPatch {
+	day: DayOfWeek!
+
+	closed: Boolean! = false
+	break: Boolean! = false
+
+	forenoon: TimerangeInput
+	afternoon: TimerangeInput
+}
+
+input TimerangeInput {
+	start: Time!
+	end: Time!
+}
+
+type UpsertBranchOpeningHourPayload {
+	branch: Branch!
+}

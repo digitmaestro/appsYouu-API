@@ -1,0 +1,23 @@
+scalar DateTime
+
+directive @id on FIELD_DEFINITION
+directive @unique on FIELD_DEFINITION
+directive @createdAt on FIELD_DEFINITION
+directive @updatedAt on FIELD_DEFINITION
+directive @default(value: Boolean!) on FIELD_DEFINITION
+
+directive @relation(
+	link: LinkBehavior,
+	name: String,
+	onDelete: DeleteBehavior! = SET_NULL,
+) on FIELD_DEFINITION
+
+enum DeleteBehavior {
+	SET_NULL
+	CASCADE
+}
+
+enum LinkBehavior {
+	INLINE
+	TABLE
+}

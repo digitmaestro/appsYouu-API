@@ -1,0 +1,34 @@
+extend type Query {
+	appointmentTimeslots(
+		input: TimeslotInput!
+	): Timeslots!
+}
+
+input TimeslotInput {
+	branch: ID!
+
+	"If an employee is provided, time slots only show for the given employee."
+	employee: ID
+
+	"An optional start date which defaults to today. The time part is ignored."
+	start: Time
+
+	services: [ConnectAppointmentService!]!
+	products: [ConnectAppointmentProduct!]
+}
+
+type Timeslots {
+	"The calculated duration in minutes."
+	duration: Int!
+
+	"The calculated total price, including services and products."
+	price: Price!
+
+	"All timeslot ranges. Returns an empty array if none available."
+	ranges: [TimeslotRange!]!
+}
+
+type TimeslotRange {
+	start: Time!
+	end: Time!
+}

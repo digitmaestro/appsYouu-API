@@ -1,0 +1,42 @@
+interface ICustomer {
+	appointments(input: AppointmentInput): AppointmentConnection!
+	phoneNumber: PhoneNumber
+	note: String
+	reviews: CustomerReviewConnection!
+}
+
+type Customer implements Node & IUser & ICustomer {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	type: UserType!
+	email: String!
+
+	firstName: String
+	lastName: String
+	fullName: String
+	gender: Gender
+	zipCode: String
+	street: String
+	city: String
+	birthday: String
+
+	image: Image
+	phoneNumber: PhoneNumber
+	note: String
+	allowReviewSharing: Boolean
+
+	appointments(input: AppointmentInput): AppointmentConnection!
+	reviews: CustomerReviewConnection!
+	notificationToken: String
+	activated: Boolean
+}
+
+type CustomerConnection {
+	nodes: [Customer!]!
+}
+
+type CustomerReviewConnection {
+	nodes: [IReview!]!
+}

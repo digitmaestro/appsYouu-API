@@ -1,0 +1,28 @@
+# local: http://localhost:4466/keskin/default
+endpoint: http://${env:PRISMA_HOST}/keskin/${env:APP_NAMESPACE}
+
+datamodel:
+  - models/appointment.prisma
+  - models/user.prisma
+  - models/session.prisma
+  - models/company.prisma
+  - models/product.prisma
+  - models/service.prisma
+  - models/branch.prisma
+  - models/branch-opening-hour.prisma
+  - models/review.prisma
+  - models/favorite.prisma
+  - models/news.prisma
+  - models/email-template.prisma
+  - models/localized-string.prisma
+  - models/product-service-attribute.prisma
+  - models/password-token.prisma
+  - models/working-hours.prisma
+  - shared.graphqls
+
+generate:
+  - generator: go-client
+    output: ../prisma/
+
+seed:
+  run: go run ./seed

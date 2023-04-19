@@ -1,0 +1,15 @@
+extend type Mutation {
+	"Sends an invite email to users. Can only be invoked by a company manager or employee."
+	sendInviteEmail(input: SendInviteEmailInput!, language: String): SendEmailPayload!
+}
+
+input SendInviteEmailInput {
+	email: String!
+	name: String!
+	gender: Gender!
+	branch: ID!
+}
+
+type SendEmailPayload {
+	status: String!
+}

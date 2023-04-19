@@ -1,0 +1,8 @@
+extend type Query {
+	orderHistory(language: String): OrderHistoryPayload!
+}
+
+type OrderHistoryPayload {
+	products: ProductConnection!
+	services: ServiceConnection!
+}

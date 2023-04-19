@@ -1,0 +1,29 @@
+"An object with an ID."
+interface Node {
+	"The unique identifier for the node."
+	id: ID!
+}
+
+"Order nodes by a given direction."
+enum OrderByDirectionInput {
+	"""
+	Ascending.
+	For example: `1, 2, 3, 4`.
+	Date example: `yesterday, today, tomorrow`.
+	"""
+	ASC
+
+	"""
+	Descending.
+	For example: `4, 3, 2, 1`.
+	Date example: `today, yesterday, 2 days ago, 3 days ago`.
+	"""
+	DESC
+}
+
+input DateFilter {
+	gt: Time
+	gte: Time
+	lt: Time
+	lte: Time
+}

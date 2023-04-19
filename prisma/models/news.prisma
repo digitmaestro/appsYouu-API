@@ -1,0 +1,10 @@
+type News {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	title: LocalizedString! @relation(name: "LocalizedNewsTitle", link: INLINE)
+	image: String
+	
+	branch: Branch! @relation(name: "NewsToBranch", link: INLINE)
+}

@@ -1,0 +1,30 @@
+extend type Query {
+	customer(id: ID!, language: String): Customer!
+	customers(input: CustomerInput!, language: String): CustomerConnection!
+}
+
+input CustomerInput {
+	"Returns all customers from a given branch."
+	branch: ID
+
+	"Returns all customers from a given company."
+	company: ID
+	
+	order: CustomerOrderByInput
+}
+
+input CustomerOrderByInput {
+	field: CustomerOrderByFields!
+	direction: OrderByDirectionInput!
+}
+
+enum CustomerOrderByFields {
+	createdAt
+	updatedAt
+	firstName
+	lastName
+	gender
+	birthday
+	city
+	zipCode
+}

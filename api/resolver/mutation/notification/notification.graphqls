@@ -1,0 +1,8 @@
+type NotificationPayload {
+	userId: ID!
+	result: String!
+}
+
+type NotificationsPayload {
+	payloads: [NotificationPayload!]!
+}

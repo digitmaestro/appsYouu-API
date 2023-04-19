@@ -1,0 +1,24 @@
+extend type Mutation {
+	"Create an appointment by a staff and the current viewer context. Before invoking this mutation, appointmentTimeslots should be queried first."
+	staffCreateAppointment(
+		input: StaffCreateAppointmentInput!
+		language: String
+	): StaffCreateAppointmentPayload!
+}
+
+input StaffCreateAppointmentInput {
+	"The branch."
+	branch: ID!
+
+	"The customer."
+	customer: ID!
+
+	"The employee. When unspecified, defaults to the viewer."
+	employee: ID
+
+	data: CreateAppointmentData!
+}
+
+type StaffCreateAppointmentPayload {
+	appointment: Appointment!
+}

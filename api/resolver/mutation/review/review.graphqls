@@ -1,0 +1,61 @@
+extend type Mutation {
+	"Creates a review of the specified type. Can only be invoked by customers."
+	upsertReview(
+		input: UpsertReviewInput!
+	): UpsertReviewPayload!
+	approveReview(
+		id: ID!
+		status: ReviewStatus!
+	): ApproveReviewPayload!
+	deleteReview(
+		id: ID!
+	): DeleteReviewPayload!
+}
+
+input UpsertReviewInput {
+	appointment: ID
+	product: ID
+	service: ID
+	review: ID
+	data: UpdateReviewPatch!
+}
+
+type UpsertReviewPayload {
+	review: IReview!
+}
+
+type ApproveReviewPayload {
+	review: IReview!
+}
+
+type DeleteReviewPayload {
+	review: IReview!
+}
+
+input CreateReviewData {
+	stars: Float!
+	title: String!
+	text: String!
+}
+
+input UpdateReviewPatch {
+	stars: Float
+	title: String
+	text: String
+	status: ReviewStatus
+}
+
+input CreateAppointmentReviewInput {
+	appointment: ID!
+	review: CreateReviewData!
+}
+
+input CreateProductReviewInput {
+	product: ID!
+	review: CreateReviewData!
+}
+
+input CreateServiceReviewInput {
+	service: ID!
+	review: CreateReviewData!
+}

@@ -1,0 +1,23 @@
+input CreateUserData {
+	email: String!
+	firstName: String!
+	lastName: String!
+	gender: Gender!
+	phoneNumber: String
+	zipCode: String
+	street: String
+	city: String
+	birthday: String
+}
+
+input UpdateUserPatch {
+	email: String
+	firstName: String
+	lastName: String
+	gender: Gender
+	phoneNumber: String
+	zipCode: String
+	street: String
+	city: String
+	birthday: String
+}

@@ -1,0 +1,41 @@
+type Branch implements Node {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	name: String
+	welcomeMessage: String
+	phoneNumber: PhoneNumber
+	address: String
+	image: Image
+	websiteUrl: String
+	navigationLink: String
+	sharingRedirectUrl: String
+	imprint: String
+
+	company: Company!
+
+	openingHours: OpeningHours!
+	
+	logo: Image
+	appTheme: String
+	
+	news: [News!]!
+
+	smtpSendHost: String
+	smtpSendPort: String
+	smtpUsername: String
+	smtpPassword: String
+	fromEmail: String
+	
+	reviews: AppointmentReviewConnection!
+	reviewAggregations: ReviewAggregations
+	
+	mailchimpApiKey: String
+	mailchimpListId: String
+	mailchimpCredentialsValid: Boolean
+}
+
+type BranchConnection {
+	nodes: [Branch!]!
+}

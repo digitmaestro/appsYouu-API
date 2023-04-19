@@ -1,0 +1,13 @@
+"PageInfo contains info about the current page."
+type PageInfo {
+	"Indicates whether a next page exists. Defaults to false if not navigating forward."
+	hasNextPage: Boolean!
+}
+
+"PaginationInput is an input solely used for cursor-based, relay-like pagination."
+input PaginationInput {
+	"Only return results after specified cursor."
+	after: Cursor
+	"Limit the result to a given value. Value defaults to 10 and can be between 1 and 100."
+	limit: Int = 10
+}

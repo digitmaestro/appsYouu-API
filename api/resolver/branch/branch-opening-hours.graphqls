@@ -1,0 +1,51 @@
+"A wrapper for an opening hour."
+type OpeningHours {
+	formatted: [FormattedOpeningHour!]!
+	raw: [RawOpeningHour!]!
+}
+
+"A human-formatted array to display opening hours. Equal days are summarized."
+type FormattedOpeningHour implements OpeningHourBase {
+	"The day key, e.g. `MO` or `MO-FR`"
+	key: String!
+
+	closed: Boolean!
+	break: Boolean!
+	shortDay: String!
+	fullDay: String!
+
+	"A formatted value containing either the opening time for that day or a translated 'closed' message."
+	value: String!
+}
+
+"A raw array to display opening hours by day."
+type RawOpeningHour implements OpeningHourBase {
+	day: DayOfWeek!
+
+	closed: Boolean!
+	break: Boolean!
+	shortDay: String!
+	fullDay: String!
+
+	forenoon: Timerange
+	afternoon: Timerange
+}
+
+type Timerange {
+	start: Time!
+	end: Time!
+}
+
+interface OpeningHourBase {
+	"A formatted 2-digit day, e.g. `Mo`"
+	shortDay: String!
+
+	"A formatted full day name, e.g. `Monday`"
+	fullDay: String!
+
+	"Indicates whether the branch is completely closed on that day."
+	closed: Boolean!
+
+	"Indicates whether the branch has separate times for forenoon and afternoon."
+	break: Boolean!
+}

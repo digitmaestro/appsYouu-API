@@ -1,0 +1,37 @@
+extend type Mutation {
+	"Creates a branch. Can only be invoked by a company manager."
+	createBranch(
+		input: CreateBranchInput!
+		language: String
+	): CreateBranchPayload!
+}
+
+input CreateBranchInput {
+	company: ID!
+	data: CreateBranchData!
+}
+
+input CreateBranchData {
+	name: String!
+	phoneNumber: String
+	address: String
+	welcomeMessage: String
+	image: Upload
+	logo: Upload
+	appTheme: String
+	smtpSendHost: String
+	smtpSendPort: String
+	smtpUsername: String
+	smtpPassword: String
+	fromEmail: String
+	websiteUrl: String!
+	navigationLink: String
+	sharingRedirectUrl: String
+	mailchimpApiKey: String
+	mailchimpListId: String
+	imprint: String!
+}
+
+type CreateBranchPayload {
+	branch: Branch!
+}

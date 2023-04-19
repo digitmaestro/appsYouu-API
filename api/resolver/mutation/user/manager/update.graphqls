@@ -1,0 +1,18 @@
+extend type Mutation {
+	"Updates a manager. Can only be invoked by a manager of the same company or an administrator."
+	updateManager(input: UpdateManagerInput!): UpdateManagerPayload!
+}
+
+input UpdateManagerInput {
+	id: ID!
+	patch: UpdateUserPatch!
+	patchManager: UpdateManagerPatch!
+}
+
+input UpdateManagerPatch {
+	workingHours: [WorkingHoursInput!]
+}
+
+type UpdateManagerPayload {
+	manager: Manager!
+}

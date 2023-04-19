@@ -1,0 +1,12 @@
+extend type Mutation {
+	requestActivationLink(input: RequestActivationLinkInput!): RequestActivationLinkPayload!
+}
+
+input RequestActivationLinkInput {
+	email: String!
+	company: ID
+}
+
+type RequestActivationLinkPayload {
+	status: String!
+}

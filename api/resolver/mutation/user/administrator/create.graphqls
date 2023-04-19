@@ -1,0 +1,14 @@
+extend type Mutation {
+	"Creates a administrator. Can only be invoked by an administrator."
+	createAdministrator(
+		input: CreateAdministratorInput!
+	): CreateAdministratorPayload!
+}
+
+input CreateAdministratorInput {
+	user: CreateUserData!
+}
+
+type CreateAdministratorPayload {
+	administrator: Administrator!
+}

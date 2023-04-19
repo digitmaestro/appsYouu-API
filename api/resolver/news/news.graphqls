@@ -1,0 +1,14 @@
+type News implements Node {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	title: String
+	image: Image
+
+	branch: Branch!
+}
+
+type NewsConnection {
+	nodes: [News!]!
+}

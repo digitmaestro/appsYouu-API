@@ -1,0 +1,11 @@
+extend type Mutation {
+	activateAccount(input: ActivateAccountInput!): ActivateAccountPayload!
+}
+
+input ActivateAccountInput {
+	token: String!
+}
+
+type ActivateAccountPayload {
+	status: String!
+}

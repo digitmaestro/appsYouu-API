@@ -1,0 +1,21 @@
+extend type Mutation {
+	"Creates a customer. Can only be invoked by employees or company managers."
+	createCustomer(
+		input: CreateCustomerInput!
+	): CreateCustomerPayload!
+}
+
+input CreateCustomerInput {
+	company: ID!
+	user: CreateUserData!
+	customer: CreateCustomerData!
+}
+
+type CreateCustomerPayload {
+	customer: Customer!
+}
+
+input CreateCustomerData {
+	note: String
+	allowReviewSharing: Boolean
+}

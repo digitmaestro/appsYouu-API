@@ -1,0 +1,26 @@
+extend type Mutation {
+	"Approve an appointment. Only invokable by staff. This will set the appointment status to APPROVED."
+	staffApproveAppointment(
+		input: StaffApproveAppointmentInput!
+		language: String
+	): StaffApproveAppointmentPayload!
+}
+
+input StaffApproveAppointmentInput {
+	"The appointment ID."
+	id: ID!
+
+	patch: StaffApproveAppointmentPatch
+}
+
+input StaffApproveAppointmentPatch {
+	"Optionally override the existing description."
+	desc: String
+
+	"Optionally set a note."
+	note: String
+}
+
+type StaffApproveAppointmentPayload {
+	appointment: Appointment!
+}

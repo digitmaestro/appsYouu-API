@@ -1,0 +1,36 @@
+interface IManager {
+	appointments(input: AppointmentInput): AppointmentConnection!
+	company: Company!
+	workingHours: WorkingHours!
+}
+
+type Manager implements Node & IStaff & IPublicStaff & IUser & IManager {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	type: UserType!
+	email: String!
+
+	firstName: String
+	lastName: String
+	fullName: String
+	image: Image
+	gender: Gender
+	phoneNumber: PhoneNumber
+	zipCode: String
+	street: String
+	city: String
+	birthday: String
+
+	company: Company!
+
+	appointments(input: AppointmentInput): AppointmentConnection!
+	notificationToken: String
+	workingHours: WorkingHours!
+	activated: Boolean
+}
+
+type ManagerConnection {
+	nodes: [Manager!]!
+}

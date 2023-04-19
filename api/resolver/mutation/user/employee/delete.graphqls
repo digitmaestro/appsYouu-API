@@ -1,0 +1,12 @@
+extend type Mutation {
+	"Deletes an employee. Can only be invoked by company managers."
+	deleteEmployee(input: DeleteEmployeeInput!): DeleteEmployeePayload!
+}
+
+input DeleteEmployeeInput {
+	id: ID!
+}
+
+type DeleteEmployeePayload {
+	employee: Employee!
+}

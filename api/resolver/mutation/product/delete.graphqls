@@ -1,0 +1,12 @@
+extend type Mutation {
+	"Deletes a product. Can only be invoked by a company manager."
+	deleteProduct(input: DeleteProductInput!, language: String): DeleteProductPayload!
+}
+
+input DeleteProductInput {
+	id: ID!
+}
+
+type DeleteProductPayload {
+	product: Product!
+}

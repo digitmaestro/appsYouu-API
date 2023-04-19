@@ -1,0 +1,18 @@
+extend type Mutation {
+	"Updates a news item. Can only be invoked by a company manager."
+	updateNews(input: UpdateNewsInput!, language: String): UpdateNewsPayload!
+}
+
+input UpdateNewsInput {
+	id: ID!
+	patch: UpdateNewsPatch!
+}
+
+input UpdateNewsPatch {
+	title: String
+	image: Upload
+}
+
+type UpdateNewsPayload {
+	news: News!
+}

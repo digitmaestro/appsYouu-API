@@ -1,0 +1,27 @@
+extend type Query {
+	product(id: ID!, language: String): Product!
+	products(input: ProductInput!, language: String): ProductConnection!
+}
+
+input ProductInput {
+	"Returns all products from a given branch."
+	branch: ID
+
+	"Returns all products from a given company."
+	company: ID
+
+	"Order by field and direction."
+	order: ProductOrderByInput
+}
+
+input ProductOrderByInput {
+	field: ProductOrderByFields!
+	direction: OrderByDirectionInput!
+}
+
+enum ProductOrderByFields {
+	createdAt
+	updatedAt
+	name
+	price
+}

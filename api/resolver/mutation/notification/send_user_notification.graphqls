@@ -1,0 +1,9 @@
+extend type Mutation {
+	sendUserNotification(input: SendUserNotificationInput): NotificationsPayload
+}
+
+input SendUserNotificationInput {
+	title: String!
+	text: String!
+	users: [ID!]!
+}

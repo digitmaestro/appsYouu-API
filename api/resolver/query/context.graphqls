@@ -1,0 +1,7 @@
+extend type Query {
+	"""
+	This context-based method returns the current company to simplify accessing it,
+	because companies have their own subdomain or domain name.
+	"""
+	currentCompany: Company
+}

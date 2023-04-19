@@ -1,0 +1,15 @@
+extend type Query {
+	"Get an employee. Requires viewer to be a company manager."
+	employee(id: ID!, language: String): Employee!
+
+	"List employees. Requires viewer to be a company manager."
+	employees(input: EmployeeInput!, language: String): EmployeeConnection!
+}
+
+input EmployeeInput {
+	"Returns all employees from a given branch."
+	branch: ID
+
+	"Returns all employees from a given company."
+	company: ID
+}

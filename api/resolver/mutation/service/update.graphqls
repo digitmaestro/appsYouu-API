@@ -1,0 +1,25 @@
+extend type Mutation {
+	"Updates a service. Can only be invoked by a company manager."
+	updateService(input: UpdateServiceInput!, language: String): UpdateServicePayload!
+}
+
+input UpdateServiceInput {
+	id: ID!
+	patch: UpdateServicePatch!
+}
+
+input UpdateServicePatch {
+	name: String
+	desc: String
+	price: Float
+	"The duration of this service in minutes."
+	duration: Int
+	genderTarget: GenderTarget
+	image: Upload
+	attributes: [ProductServiceAttributeInput!]
+	removeAttributes: [String!]
+}
+
+type UpdateServicePayload {
+	service: Service!
+}

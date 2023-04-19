@@ -1,0 +1,31 @@
+extend type Query {
+	service(id: ID!, language: String): Service!
+	services(input: ServiceInput!, language: String): ServiceConnection!
+}
+
+input ServiceInput {
+	"Returns all services from a given branch."
+	branch: ID
+
+	"Returns all services from a given company."
+	company: ID
+
+	"Order by field and direction."
+	order: ServiceOrderByInput
+
+	"Only return services for a specific gender. If omitted, return any."
+	genderTarget: GenderTarget
+}
+
+input ServiceOrderByInput {
+	field: ServiceOrderByFields!
+	direction: OrderByDirectionInput!
+}
+
+enum ServiceOrderByFields {
+	createdAt
+	updatedAt
+	name
+	genderTarget
+	price
+}

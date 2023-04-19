@@ -1,0 +1,11 @@
+type ProductServiceAttribute {
+	key: String!
+	name: String
+	value: String
+}
+
+input ProductServiceAttributeInput {
+	key: String!
+	name: String
+	value: String
+}

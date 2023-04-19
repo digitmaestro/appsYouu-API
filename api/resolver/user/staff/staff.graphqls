@@ -1,0 +1,36 @@
+"IStaff describes a user working at a company. This can be employees or company managers."
+interface IStaff {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	type: UserType!
+	email: String!
+
+	firstName: String
+	lastName: String
+	fullName: String
+	gender: Gender
+	zipCode: String
+	street: String
+	city: String
+	birthday: String
+
+	image: Image
+	phoneNumber: PhoneNumber
+
+	appointments(input: AppointmentInput): AppointmentConnection!
+	workingHours: WorkingHours!
+	activated: Boolean
+}
+
+"IPublicStaff describes a user working at a company and the fields which are accessible by the public."
+interface IPublicStaff {
+	id: ID!
+
+	firstName: String
+	lastName: String
+	fullName: String
+
+	image: Image
+}

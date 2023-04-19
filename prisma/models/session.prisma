@@ -1,0 +1,10 @@
+type Session {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	token: String! @unique
+
+	user: User! @relation(name: "SessionToUser")
+	company: Company @relation(name: "SessionToCompany")
+}

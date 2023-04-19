@@ -1,0 +1,22 @@
+interface IUser {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	type: UserType!
+	email: String!
+
+	firstName: String
+	lastName: String
+	fullName: String
+	gender: Gender
+	zipCode: String
+	street: String
+	city: String
+	birthday: String
+
+	image: Image
+	phoneNumber: PhoneNumber
+	notificationToken: String
+	activated: Boolean
+}

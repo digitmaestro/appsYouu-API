@@ -1,0 +1,50 @@
+type User {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	type: UserType!
+	email: String! # not unique on a database level, because users can have multiple accounts at different companies
+	passwordHash: String!
+
+	firstName: String!
+	lastName: String!
+	gender: Gender! @default(value: MALE)
+	zipCode: String
+	street: String
+	city: String
+	birthday: DateTime
+	birthdate: String
+
+	"Customers can have phone number."
+	phoneNumber: String
+
+	"The profile picture ID."
+	image: ID
+
+	"""
+	Users with type Customer, as well as company admins
+	are always connected to a company.
+	"""
+	company: Company @relation(name: "CustomerAndManagerToCompany", link: INLINE)
+	note: String
+	reviews: [Review!]! @relation(name: "CustomerToReview")
+	allowReviewSharing: Boolean! @default(value: true)
+
+	"""
+	Users with type Employee are connected to a branch.
+	"""
+	branch: Branch @relation(name: "EmployeeToBranch", link: INLINE)
+	workingHours: [WorkingHours!]! @relation(name: "UserWorkingHours", onDelete: CASCADE)
+
+	sessions: [Session!]! @relation(name: "SessionToUser", onDelete: CASCADE)
+	
+	notificationToken: String
+	language: String @default(value: "de")
+	
+	passwordToken: PasswordToken @relation(name: "PasswordTokenForUser", onDelete: CASCADE)
+
+	deleted: Boolean! @default(value: false)
+	activated: Boolean! @default(value: false)
+	activateToken: String
+}

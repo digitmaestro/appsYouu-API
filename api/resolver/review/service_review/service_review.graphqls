@@ -1,0 +1,26 @@
+interface IServiceReview {
+	service: Service!
+}
+
+type ServiceReview implements Node & IReview & IServiceReview {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	type: ReviewType!
+	stars: Float!
+	title: String!
+	text: String!
+	status: ReviewStatus!
+
+	"""
+	Each review has to be made by a customer
+	"""
+	customer: Customer!
+	
+	service: Service!
+}
+
+type ServiceReviewConnection {
+	nodes: [ServiceReview!]!
+}

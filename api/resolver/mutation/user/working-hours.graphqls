@@ -1,0 +1,9 @@
+input WorkingHoursInput {
+	day: DayOfWeek!
+
+	notWorking: Boolean! = false
+	break: Boolean! = false
+
+	forenoon: TimerangeInput
+	afternoon: TimerangeInput
+}

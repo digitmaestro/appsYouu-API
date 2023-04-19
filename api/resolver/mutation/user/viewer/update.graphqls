@@ -1,0 +1,18 @@
+extend type Mutation {
+	updateViewer(input: UpdateViewerInput!): UpdateViewerPayload!
+	updateNotificationToken(input: UpdateNotificationTokenInput!): UpdateViewerPayload!
+}
+
+input UpdateViewerInput {
+	patch: UpdateUserPatch!
+	allowReviewSharing: Boolean
+	password: String
+}
+
+input UpdateNotificationTokenInput {
+	token: String!
+}
+
+type UpdateViewerPayload {
+	user: IUser!
+}

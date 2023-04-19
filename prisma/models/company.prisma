@@ -1,0 +1,37 @@
+type Company {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	name: LocalizedString! @relation(name: "CompanyName", link: INLINE)
+	customUrls: [CustomUrl!]! @relation(name: "CompanyCustomUrls", onDelete: CASCADE)
+	aliases: [Alias!]! @relation(name: "CompanyUrlAliases", onDelete: CASCADE)
+	sharingRedirectUrl: String
+	
+	logo: String
+	appTheme: String
+	pwaShortName: LocalizedString! @relation(name: "CompanyPwaShortName", link: INLINE)
+	pwaIcon: String
+	pwaThemeColor: String!
+	pwaBackgroundColor: String!
+
+	users: [User!]! @relation(name: "CustomerAndManagerToCompany")
+
+	branches: [Branch!]! @relation(onDelete: CASCADE)
+}
+
+type CustomUrl {
+	id: ID! @id
+	
+	company: Company! @relation(name: "CompanyCustomUrls", link: INLINE)
+	
+	value: String! @unique
+}
+
+type Alias {
+	id: ID! @id
+	
+	company: Company! @relation(name: "CompanyUrlAliases", link: INLINE)
+	
+	value: String! @unique
+}

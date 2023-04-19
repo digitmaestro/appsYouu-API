@@ -1,0 +1,46 @@
+"A wrapper for working hours."
+type WorkingHours {
+	formatted: [FormattedWorkingHours!]!
+	raw: [RawWorkingHours!]!
+}
+
+"A human-formatted array to display working hours. Equal days are summarized."
+type FormattedWorkingHours implements WorkingHoursBase {
+	"The day key, e.g. `MO` or `MO-FR`"
+	key: String!
+
+	notWorking: Boolean!
+	break: Boolean!
+	shortDay: String!
+	fullDay: String!
+
+	"A formatted value containing either the working time for that day or a translated 'not working' message."
+	value: String!
+}
+
+"A raw array to display working hours by day."
+type RawWorkingHours implements WorkingHoursBase {
+	day: DayOfWeek!
+
+	notWorking: Boolean!
+	break: Boolean!
+	shortDay: String!
+	fullDay: String!
+
+	forenoon: Timerange
+	afternoon: Timerange
+}
+
+interface WorkingHoursBase {
+	"A formatted 2-digit day, e.g. `Mo`"
+	shortDay: String!
+
+	"A formatted full day name, e.g. `Monday`"
+	fullDay: String!
+
+	"Indicates whether the employee is not working on this day in general."
+	notWorking: Boolean!
+
+	"Indicates whether the employee has separate times for forenoon and afternoon."
+	break: Boolean!
+}

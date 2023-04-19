@@ -1,0 +1,12 @@
+extend type Mutation {
+	"Deletes a administrator. Can only be invoked by an administrator."
+	deleteAdministrator(input: DeleteAdministratorInput!): DeleteAdministratorPayload!
+}
+
+input DeleteAdministratorInput {
+	id: ID!
+}
+
+type DeleteAdministratorPayload {
+	administrator: Administrator!
+}

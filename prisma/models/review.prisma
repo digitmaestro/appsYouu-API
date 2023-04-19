@@ -1,0 +1,23 @@
+type Review {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	type: ReviewType!
+	stars: Float!
+	title: String!
+	text: String!
+	status: ReviewStatus! @default(value: PENDING)
+
+	"""
+	Each review has to made by a customer
+	"""
+	customer: User! @relation(name: "CustomerToReview", link: INLINE)
+
+	"""
+	Each review is associated with either a product, a service or an appointment.
+	"""
+	product: Product @relation(name: "ReviewToProduct", link: INLINE)
+	service: Service @relation(name: "ReviewToService", link: INLINE)
+	appointment: Appointment @relation(name: "ReviewToAppointment", link: INLINE)
+}

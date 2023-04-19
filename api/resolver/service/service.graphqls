@@ -1,0 +1,25 @@
+type Service implements Node {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	name: String!
+	desc: String
+	genderTarget: GenderTarget
+	price: Price!
+
+	"The duration of this service in minutes."
+	duration: Int!
+
+	image: Image
+	attributes: [ProductServiceAttribute!]!
+	
+	reviews: ServiceReviewConnection!
+	viewerReview: ServiceReview
+	viewerCanReview: Boolean
+	reviewAggregations: ReviewAggregations
+}
+
+type ServiceConnection {
+	nodes: [Service!]!
+}

@@ -1,0 +1,29 @@
+extend type Mutation {
+	"Updates a company. Can only be invoked by an administrator."
+	updateCompany(
+		input: UpdateCompanyInput!
+		language: String
+	): UpdateCompanyPayload!
+}
+
+input UpdateCompanyInput {
+	id: ID!
+	patch: UpdateCompanyData!
+}
+
+input UpdateCompanyData {
+	name: String
+	aliases: [String!]
+	customUrls: [String!]
+	sharingRedirectUrl: String
+	logo: Upload
+	appTheme: String
+	pwaShortName: String
+	pwaIcon: Upload
+	pwaThemeColor: String
+	pwaBackgroundColor: String
+}
+
+type UpdateCompanyPayload {
+	company: Company!
+}

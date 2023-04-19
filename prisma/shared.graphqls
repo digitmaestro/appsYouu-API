@@ -1,0 +1,56 @@
+"The user type."
+enum UserType {
+	"The end-customer of a hairdresser."
+	CUSTOMER
+
+	"The employee of a company."
+	EMPLOYEE
+
+	"The manager of a company."
+	MANAGER
+	
+	"The administrator of the system."
+	ADMINISTRATOR
+}
+
+enum ReviewType {
+	PRODUCT
+	SERVICE
+	APPOINTMENT
+}
+
+"The day of the week."
+enum DayOfWeek {
+	MO
+	TU
+	WE
+	TH
+	FR
+	SA
+	SU
+}
+
+"The status of an appointment."
+enum AppointmentStatus {
+	REQUESTED
+	APPROVED
+	CANCELED
+}
+
+"A gender. For neiher of the below options, use null."
+enum Gender {
+	MALE
+	FEMALE
+}
+
+enum GenderTarget {
+	MALE
+	FEMALE
+	ANY
+}
+
+enum ReviewStatus {
+	PENDING
+	APPROVED
+	REJECTED
+}

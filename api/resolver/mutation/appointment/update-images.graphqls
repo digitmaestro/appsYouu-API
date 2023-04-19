@@ -1,0 +1,13 @@
+extend type Mutation {
+	updateBeforeImage(input: UpdateAppointmentImageInput!, language: String): UpdateAppointmentImagePayload!
+	updateAfterImage(input: UpdateAppointmentImageInput!, language: String): UpdateAppointmentImagePayload!
+}
+
+input UpdateAppointmentImageInput {
+	appointment: ID!
+	image: Upload!
+}
+
+type UpdateAppointmentImagePayload {
+	appointment: Appointment!
+}

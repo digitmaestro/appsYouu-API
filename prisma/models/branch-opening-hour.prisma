@@ -1,0 +1,20 @@
+type BranchOpeningHour {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	branch: Branch! @relation(link: INLINE)
+
+	day: DayOfWeek!
+
+	closed: Boolean! @default(value: true)
+	break: Boolean! @default(value: false)
+
+	# morning
+	startForenoon: DateTime
+	endForenoon: DateTime
+
+	# afternoon
+	startAfternoon: DateTime
+	endAfternoon: DateTime
+}

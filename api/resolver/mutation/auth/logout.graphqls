@@ -1,0 +1,8 @@
+extend type Mutation {
+	logout: LogoutPayload!
+}
+
+type LogoutPayload {
+	"Session is always nil, this is useful for automatically clearing the session out of the GraphQL store."
+	session: Session
+}

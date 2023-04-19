@@ -1,0 +1,15 @@
+input CreateAppointmentData {
+	start: Time!
+	desc: String!
+	services: [ConnectAppointmentService!]!
+	products: [ConnectAppointmentProduct!]
+}
+
+input ConnectAppointmentService {
+	id: ID!
+}
+
+input ConnectAppointmentProduct {
+	id: ID!
+	count: Int!
+}

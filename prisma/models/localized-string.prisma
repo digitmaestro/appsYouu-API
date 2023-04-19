@@ -1,0 +1,7 @@
+type LocalizedString {
+	id: ID! @id
+	
+	de: String
+	en: String
+	tr: String
+}

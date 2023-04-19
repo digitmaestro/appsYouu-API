@@ -1,0 +1,12 @@
+extend type Mutation {
+	"Unmark a product or service as favorite for a user."
+	deleteFavorite(input: DeleteFavoriteInput!): DeleteFavoritePayload!
+}
+
+input DeleteFavoriteInput {
+	id: ID!
+}
+
+type DeleteFavoritePayload {
+	favorite: Favorite!
+}

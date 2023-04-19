@@ -1,0 +1,9 @@
+extend type Query {
+	branch(id: ID!, language: String): Branch!
+	branches(input: BranchesInput!, language: String): BranchConnection!
+}
+
+input BranchesInput {
+	"The company ID."
+	company: ID
+}

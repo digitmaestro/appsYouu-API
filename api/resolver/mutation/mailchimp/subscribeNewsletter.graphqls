@@ -1,0 +1,11 @@
+extend type Mutation {
+	subscribeNewsletter(
+		email: String!
+		branchId: ID!
+	): SubscribeNewsletterPayload!
+}
+
+type SubscribeNewsletterPayload {
+	id: String
+	uniqueEmailID: String
+}

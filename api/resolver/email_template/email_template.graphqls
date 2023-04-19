@@ -1,0 +1,9 @@
+type EmailTemplate {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	name: String
+	content: String
+	title: String
+}

@@ -1,0 +1,7 @@
+type Favorite implements Node {
+	id: ID!
+
+	user: IUser!
+	product: Product
+	service: Service
+}

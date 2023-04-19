@@ -1,0 +1,20 @@
+extend type Mutation {
+	"Creates a manager. Can only be invoked by a manager of the same company or an administrator."
+	createManager(
+		input: CreateManagerInput!
+	): CreateManagerPayload!
+}
+
+input CreateManagerInput {
+	company: ID!
+	user: CreateUserData!
+	manager: CreateManagerData!
+}
+
+input CreateManagerData {
+	workingHours: [WorkingHoursInput!]
+}
+
+type CreateManagerPayload {
+	manager: Manager!
+}

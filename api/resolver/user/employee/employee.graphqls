@@ -1,0 +1,34 @@
+interface IEmployee {
+	appointments(input: AppointmentInput): AppointmentConnection!
+	workingHours: WorkingHours!
+}
+
+type Employee implements Node & IStaff & IPublicStaff & IUser & IEmployee {
+	id: ID!
+	createdAt: String!
+	updatedAt: String!
+
+	type: UserType!
+	email: String!
+
+	firstName: String
+	lastName: String
+	fullName: String
+	gender: Gender
+	zipCode: String
+	street: String
+	city: String
+	birthday: String
+
+	image: Image
+	phoneNumber: PhoneNumber
+
+	appointments(input: AppointmentInput): AppointmentConnection!
+	workingHours: WorkingHours!
+	notificationToken: String
+	activated: Boolean
+}
+
+type EmployeeConnection {
+	nodes: [Employee!]!
+}

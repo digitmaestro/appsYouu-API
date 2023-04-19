@@ -1,0 +1,19 @@
+extend type Mutation {
+	uploadViewerProfilePicture(upload: Upload!): UploadViewerProfilePicturePayload!
+	removeViewerProfilePicture: RemoveViewerProfilePicturePayload!
+}
+
+type UploadViewerProfilePicturePayload {
+	image: Image!
+	user: IUser!
+}
+
+type RemoveViewerProfilePicturePayload {
+	image: Image
+	user: IUser!
+}
+
+type Image {
+	id: ID!
+	url: String!
+}

@@ -1,0 +1,19 @@
+extend type Mutation {
+	"Mark a product or service as favorite for a user."
+	createFavorite(
+		input: CreateFavoriteInput!
+	): CreateFavoritePayload!
+}
+
+input CreateFavoriteInput {
+	data: CreateFavoriteData!
+}
+
+input CreateFavoriteData {
+	product: ID
+	service: ID
+}
+
+type CreateFavoritePayload {
+	favorite: Favorite!
+}

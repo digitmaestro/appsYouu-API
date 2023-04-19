@@ -1,0 +1,9 @@
+type EmailTemplate {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+	name: String! @unique
+	content: LocalizedString! @relation(name: "LocalizedEmailTemplateContent", link: INLINE)
+	title: LocalizedString! @relation(name: "LocalizedEmailTemplateTitle", link: INLINE)
+}

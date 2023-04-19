@@ -1,0 +1,18 @@
+extend type Query {
+	"Queries email template by id or name"
+	emailTemplate(input: EmailTemplateInput!, language: String): EmailTemplateQueryPayload!
+	emailTemplates(language: String): EmailTemplatesQueryPayload!
+}
+
+input EmailTemplateInput {
+	id: ID
+	name: String
+}
+
+type EmailTemplateQueryPayload {
+	template: EmailTemplate!
+}
+
+type EmailTemplatesQueryPayload {
+	templates: [EmailTemplate!]!
+}
