@@ -1,6 +1,11 @@
 # Keskin API
-
 This repository contains the Keskin GraphQL API.
+
+# Architecture
+
+This API connects to Prisma Server and Prisma Server is connected to Postgres Database
+
+`Api > Prisma > Postgres`
 
 # Local Setup
 
@@ -60,4 +65,3 @@ go run ./server
 ```
 
 Navigate to [http://localhost:4000](http://localhost:4000) in your browser to explore the API of your GraphQL server in a [GraphQL Playground](https://github.com/prisma/graphql-playground).
-
