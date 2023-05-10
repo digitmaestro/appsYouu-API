@@ -1,4 +1,4 @@
-# local: http://localhost:4466/keskin/default
+# endpoint: http://localhost:4466/keskin/dev
 endpoint: http://${env:PRISMA_HOST}/keskin/${env:APP_NAMESPACE}
 
 datamodel:

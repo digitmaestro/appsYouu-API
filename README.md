@@ -2,63 +2,62 @@
 
 This repository contains the Keskin GraphQL API.
 
-## How to use
-
 # Local Setup
+
+### 1. Install Prisma Version 1 Cli
+
 ```bash
 npm install -g prisma1
+```
+
+### 2. Install Go Version 1.13
+
+```bash
 go get golang.org/dl/go1.13
 go1.13 download
 go1.13 get
 go1.13 generate
 ```
 
+OR
 
-### 1. Download repo
+You can install Go Version Manager
+```bash
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 
-Clone the repository:
-
-```
-git clone git@github.com:steebchen/keskin-api.git
-```
-
-### 2. Install the Prisma CLI
-
-To run the example, you need the Prisma CLI. Please install it via Homebrew or [using another method](https://www.prisma.io/docs/prisma-cli-and-configuration/using-the-prisma-cli-alx4/#installation):
-
-```
-brew install prisma
-brew tap
-# or
-npm i -g prisma
+gvm install go1.13
+gvm use go1.13 --default
 ```
 
 ### 3. Set up database & deploy Prisma datamodel
 
-Start the server and the database using docker-compose:
+Start the prisma server and the database using docker-compose:
 
 ```bash
 docker-compose up -d
 ```
 
-Deploy our schema to our database:
+### 4. Generate Code With Wire and Prisma 
+After you made changes to prisma or graphql schema files, just generate the files:
 
-```
-prisma deploy # this also runs prisma generate and gqlgen
+```bash
+go generate # This actually runs below commands along with gqlgen you can look at main.go for other commands
+prisma1 generate # This will generate Prisma Client
+prisma1 deploy # This will migrate database to postgres using Prisma Server
 ```
 
-### 4. Start the GraphQL server
+If for  `prisam1 deploy` fails then you can change the endpoint with env `PRISMA_HOST` and `APP_NAMESPACE` to the hard coded ones in the `prisma > prisma.yml` file.
 
+For Seeding you can run 
+```bash
+prisma1 seed # This will run the main function in `seed > seed.go as configured in prisma.yml`
 ```
+
+### 5. Start the GraphQL server
+
+```bash
 go run ./server
 ```
 
 Navigate to [http://localhost:4000](http://localhost:4000) in your browser to explore the API of your GraphQL server in a [GraphQL Playground](https://github.com/prisma/graphql-playground).
 
-### 5. Changing the GraphQL schema
-
-After you made changes to prisma or graphql schema files, just generate the files:
-
-```
-go generate
-```
