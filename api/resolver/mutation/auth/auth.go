@@ -2,6 +2,8 @@ package auth
 
 import (
 	"context"
+	"errors"
+	"log"
 
 	"github.com/google/uuid"
 
@@ -182,7 +184,7 @@ func RequestActivationLink(
 				return err
 			}
 
-			updatedUser, err := prismaClient.UpdateUser(prisma.UserUpdateParams{
+			updatedUser, err := prismaClient.UpdateUser(prisma.UserUpdateParams{ //nolint
 				Where: prisma.UserWhereUniqueInput{
 					ID: &user.ID,
 				},
@@ -190,6 +192,12 @@ func RequestActivationLink(
 					ActivateToken: &activateToken,
 				},
 			}).Exec(ctx)
+
+			if err != nil {
+				log.Printf("error updating user %v", err)
+
+				return errors.New("error requesting link")
+			}
 
 			if updatedUser != nil {
 				user = *updatedUser
