@@ -33,7 +33,7 @@ enum DayOfWeek {
 "The status of an appointment."
 enum AppointmentStatus {
 	REQUESTED
-	APPROVED
+	APPROVEDF
 	CANCELED
 }
 
@@ -41,11 +41,14 @@ enum AppointmentStatus {
 enum Gender {
 	MALE
 	FEMALE
+	DIVERSE
+	DO_NOT_MENTION
 }
 
 enum GenderTarget {
 	MALE
 	FEMALE
+	DIVERSE
 	ANY
 }
 
