@@ -3,12 +3,18 @@ package email_template
 import (
 	"context"
 	"encoding/base64"
+	"errors"
 	"fmt"
+	"log"
 	"net/smtp"
 
 	"github.com/steebchen/keskin-api/gqlgen"
 	"github.com/steebchen/keskin-api/gqlgen/gqlerrors"
 	"github.com/steebchen/keskin-api/prisma"
+)
+
+var (
+	errSendingEmail = errors.New("error sending email")
 )
 
 func SendEmail(
@@ -64,7 +70,9 @@ func SendEmail(
 	err = smtp.SendMail(*branch.SmtpSendHost+":"+*branch.SmtpSendPort, auth, *branch.FromEmail, []string{toEmail}, []byte(message))
 
 	if err != nil {
-		return nil, err
+		log.Printf("error sending email %v", err)
+
+		return nil, errSendingEmail
 	}
 
 	return &gqlgen.SendEmailPayload{
