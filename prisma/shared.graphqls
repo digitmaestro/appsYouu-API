@@ -33,7 +33,7 @@ enum DayOfWeek {
 "The status of an appointment."
 enum AppointmentStatus {
 	REQUESTED
-	APPROVEDF
+	APPROVED
 	CANCELED
 }
 
