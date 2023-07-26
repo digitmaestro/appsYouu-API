@@ -10,6 +10,7 @@ import (
 	"github.com/caarlos0/env"
 	cron "github.com/robfig/cron/v3"
 	"github.com/rs/cors"
+	firebaseOptions "google.golang.org/api/option"
 
 	"github.com/steebchen/keskin-api/handlers/template/index"
 	"github.com/steebchen/keskin-api/handlers/template/webmanifest"
@@ -84,7 +85,7 @@ func NewServer(mux *http.ServeMux, config *Config, cronJobs *cron.Cron) *Server 
 }
 
 func NewFirebaseApp() (*firebase.App, error) {
-	return firebase.NewApp(context.Background(), nil)
+	return firebase.NewApp(context.Background(), &firebase.Config{ProjectID: "appsyouu-b6b05"}, firebaseOptions.WithCredentialsFile("./secrets/appsyouu-b6b05-firebase-adminsdk-e3sg1-3082f21a4f.json"))
 }
 
 func NewFirebaseMessagingClient(app *firebase.App) (*messaging.Client, error) {
