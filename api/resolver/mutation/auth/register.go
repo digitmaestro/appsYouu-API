@@ -75,7 +75,10 @@ func (a *Auth) Register(ctx context.Context, input gqlgen.RegisterInput) (*gqlge
 	}).Exec(ctx)
 
 	if err == nil && len(branches) > 0 {
-		go email_template.SendEmailTemplate(context.Background(), a.Prisma, "register", branches[0].ID, input.Email, input.Gender, input.LastName, input.FirstName, nil, nil, nil, &activateToken)
+		_, err := email_template.SendEmailTemplate(context.Background(), a.Prisma, "register", branches[0].ID, input.Email, input.Gender, input.LastName, input.FirstName, nil, nil, nil, &activateToken)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return &gqlgen.RegisterPayload{
