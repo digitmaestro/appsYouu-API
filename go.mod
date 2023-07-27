@@ -18,18 +18,19 @@ require (
 	github.com/hanzoai/gochimp3 v0.0.0-20200804181350-ac0caad296d3
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/machinebox/graphql v0.2.2
-	github.com/matryer/is v1.2.0 // indirect
+	github.com/matryer/is v1.4.1 // indirect
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
+	github.com/nyaruka/phonenumbers v1.0.4
 	github.com/pkg/errors v0.9.1
-	github.com/prisma/prisma-client-lib-go v0.0.0-20181017161110-68a1f9908416
+	github.com/prisma/prisma-client-lib-go v0.0.0-20220207114531-0f3024bc51c8
 	github.com/robfig/cron/v3 v3.0.0
 	github.com/robojones/iid v1.0.3
 	github.com/rs/cors v1.7.0
-	github.com/stretchr/testify v1.5.1
-	github.com/vektah/gqlparser v1.3.1
+	github.com/stretchr/testify v1.7.1
 	github.com/vektah/gqlparser/v2 v2.0.1
-	golang.org/dl v0.0.0-20210506185525-b8dea299038d // indirect
-	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
-	golang.org/x/tools v0.0.0-20200731060945-b5fad4ed8dd6 // indirect
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
+	google.golang.org/api v0.26.0
+	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
+	gopkg.in/go-playground/validator.v8 v8.18.2
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
