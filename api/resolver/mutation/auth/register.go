@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/steebchen/keskin-api/api/resolver/mutation/email_template"
 	"github.com/steebchen/keskin-api/gqlgen"
@@ -9,6 +10,7 @@ import (
 	"github.com/steebchen/keskin-api/lib/auth"
 	"github.com/steebchen/keskin-api/lib/sessctx"
 	"github.com/steebchen/keskin-api/lib/users"
+	"github.com/steebchen/keskin-api/lib/validator"
 	"github.com/steebchen/keskin-api/prisma"
 )
 
@@ -19,6 +21,16 @@ func (a *Auth) Register(ctx context.Context, input gqlgen.RegisterInput) (*gqlge
 	// a User of type Customer requires a company relation
 	if companyID == "" {
 		return nil, gqlerrors.NewInternalError("company id is required", "CompanyHeaderRequired")
+	}
+
+	err := validator.Phone(input.PhoneNumber)
+	if err != nil {
+		return nil, gqlerrors.NewValidationError(err.Error(), "InvalidPhoneNumber")
+	}
+
+	err = validator.Email(input.Email)
+	if err != nil {
+		return nil, gqlerrors.NewValidationError(err.Error(), "InvalidEmail")
 	}
 
 	emailInUse, err := users.EmailInUse(ctx, a.Prisma, input.Email, &companyID, nil, nil)
@@ -32,6 +44,7 @@ func (a *Auth) Register(ctx context.Context, input gqlgen.RegisterInput) (*gqlge
 	}
 
 	activateToken, err := GenerateActivateToken(a.Prisma, ctx)
+	fmt.Printf("TOKEN: %v", activateToken)
 
 	if err != nil {
 		return nil, err
@@ -54,7 +67,7 @@ func (a *Auth) Register(ctx context.Context, input gqlgen.RegisterInput) (*gqlge
 		PasswordHash:  auth.HashPassword(input.Password),
 		Type:          prisma.UserTypeCustomer,
 		ActivateToken: &activateToken,
-
+		Activated:     prisma.Bool(false),
 		Company: &prisma.CompanyCreateOneWithoutUsersInput{
 			Connect: &prisma.CompanyWhereUniqueInput{
 				ID: &companyID,
@@ -63,6 +76,7 @@ func (a *Auth) Register(ctx context.Context, input gqlgen.RegisterInput) (*gqlge
 	}).Exec(ctx)
 
 	if err != nil {
+		fmt.Printf("error %+v", err)
 		return nil, err
 	}
 
