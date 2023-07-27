@@ -7,11 +7,16 @@ type Branch implements Node {
 	welcomeMessage: String
 	phoneNumber: PhoneNumber
 	address: String
+
+	"TODO: multiple images - slot based (max 10 slots)"
 	image: Image
+	
 	websiteUrl: String
 	navigationLink: String
 	sharingRedirectUrl: String
 	imprint: String
+
+	"TODO: Facebook, Tiktok, Instagram (Optional)"
 
 	company: Company!
 
