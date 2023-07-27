@@ -2,11 +2,13 @@ package auth
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/steebchen/keskin-api/gqlgen"
 	"github.com/steebchen/keskin-api/gqlgen/gqlerrors"
 	"github.com/steebchen/keskin-api/lib/auth"
 	"github.com/steebchen/keskin-api/lib/sessctx"
+	"github.com/steebchen/keskin-api/lib/validator"
 	"github.com/steebchen/keskin-api/prisma"
 )
 
@@ -15,13 +17,18 @@ const noCompanyFoundCode = "NoCompanyFound"
 func (a *Auth) Login(ctx context.Context, input gqlgen.LoginInput) (*gqlgen.LoginPayload, error) {
 	companyID := sessctx.CompanyWithFallback(ctx, a.Prisma, input.Company)
 
+	err := validator.Email(input.Email)
+	if err != nil {
+		return nil, gqlerrors.NewValidationError(err.Error(), "InvalidEmail")
+	}
+
 	deleted := false
-	activated := true
+	// activated := true
 
 	where := &prisma.UserWhereInput{
-		Email:     &input.Email,
-		Deleted:   &deleted,
-		Activated: &activated,
+		Email:   &input.Email,
+		Deleted: &deleted,
+		// Activated: &activated,
 	}
 
 	// if a companyID is provided, ask for it
@@ -63,6 +70,8 @@ func (a *Auth) Login(ctx context.Context, input gqlgen.LoginInput) (*gqlgen.Logi
 	}).Exec(ctx)
 
 	if err != nil {
+		fmt.Println("Error: " + err.Error())
+
 		return nil, err
 	}
 
@@ -73,8 +82,13 @@ func (a *Auth) Login(ctx context.Context, input gqlgen.LoginInput) (*gqlgen.Logi
 
 	user := users[0]
 
+	if !user.Activated {
+		return nil, gqlerrors.NewVerificationError("user with email("+user.Email+")"+" and id("+user.ID+") not verified", "UserNotVerified")
+	}
+
 	// we want to make sure that users only log in on pages where they're supposed to.
 	if user.Type != prisma.UserTypeAdministrator && companyID == "" {
+		fmt.Println("error fkk")
 		return nil, gqlerrors.NewInternalError("company id required", noCompanyFoundCode)
 	}
 
