@@ -111,7 +111,10 @@ func RequestPasswordReset(prismaClient *prisma.Client, ctx context.Context, emai
 					}
 				}
 
-				go email_template.SendEmailTemplate(context.Background(), prismaClient, "passwordReset", branch.ID, user.Email, user.Gender, user.LastName, user.FirstName, nil, nil, &passwordToken.Token, nil)
+				_, err := email_template.SendEmailTemplate(context.Background(), prismaClient, "passwordReset", branch.ID, user.Email, user.Gender, user.LastName, user.FirstName, nil, nil, &passwordToken.Token, nil)
+				if err != nil {
+					return err
+				}
 			}
 		}
 	}
@@ -230,7 +233,10 @@ func RequestActivationLink(
 					}
 				}
 
-				go email_template.SendEmailTemplate(context.Background(), prismaClient, "activationLink", branch.ID, user.Email, user.Gender, user.LastName, user.FirstName, nil, nil, nil, &activateToken)
+				_, err := email_template.SendEmailTemplate(context.Background(), prismaClient, "activationLink", branch.ID, user.Email, user.Gender, user.LastName, user.FirstName, nil, nil, nil, &activateToken)
+				if err != nil {
+					return err
+				}
 			}
 		}
 	}
