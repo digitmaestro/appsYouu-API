@@ -54,3 +54,11 @@ const InvalidUserType = "user type is invalid"
 func NewPermissionError(message string) error {
 	return NewInternalError("unauthorized access. details: "+message, "Permission")
 }
+
+// NewVerificationError returns formatted GraphQL error for user not activated
+func NewVerificationError(message string, code string) error {
+	return &gqlerror.Error{
+		Message:    message,
+		Extensions: NewExtensions("Verification", code),
+	}
+}
