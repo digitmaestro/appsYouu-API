@@ -28,7 +28,11 @@ func SetUser(ctx context.Context, user *prisma.User) context.Context {
 func User(ctx context.Context) (*prisma.User, error) {
 	user, ok := ctx.Value(UserContextKey).(*prisma.User)
 
-	if !ok || user.Deleted || !user.Activated {
+	// if !ok || user.Deleted || !user.Activated {
+	// 	return nil, UserNotLoggedInError
+	// }
+
+	if !ok || user.Deleted {
 		return nil, UserNotLoggedInError
 	}
 
