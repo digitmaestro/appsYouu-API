@@ -2,6 +2,7 @@ package email_template
 
 import (
 	"context"
+	"log"
 	"sync"
 	"testing"
 
@@ -23,7 +24,7 @@ func TestSendEmailTemplate(t *testing.T) {
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
-		SendEmailTemplate(context.TODO(),
+		_, err := SendEmailTemplate(context.TODO(),
 			c, "register",
 			"clkjlvegj001j0839fww97vt1",
 			"rahat_murtaza@outlook.com",
@@ -34,6 +35,10 @@ func TestSendEmailTemplate(t *testing.T) {
 			prisma.Str("Some date"),
 			prisma.Str("Some token"),
 			prisma.Str("Some activationToken"))
+
+		if err != nil {
+			log.Fatalf("error sending email %v", err)
+		}
 
 		wg.Done()
 	}()
