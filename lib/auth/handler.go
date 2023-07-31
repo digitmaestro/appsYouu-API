@@ -17,6 +17,10 @@ const CompanyHeader = "X-Company"
 const LanguageHeader = "X-Language"
 
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	// Allowing all of the hosts
+	origin := r.Header.Get("Host")
+	w.Header().Set("Access-Control-Allow-Origin", origin)
+
 	ctx := sessctx.SetWriter(r.Context(), w)
 
 	ctx = sessctx.SetCompanyHeader(ctx, r.Header.Get(CompanyHeader))
