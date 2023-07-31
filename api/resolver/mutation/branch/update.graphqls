@@ -16,6 +16,9 @@ input UpdateBranchPatch {
 	images: [Upload]
 	logo: Upload
 	appTheme: String
+	facebookLink: String,
+	tiktokLink: String,
+	instagramLink: String,
 	smtpSendHost: String
 	smtpSendPort: String
 	smtpUsername: String
