@@ -26,12 +26,12 @@ func (r *CustomerMutation) UpdateCustomer(
 		return nil, err
 	}
 
-	user, err := r.Prisma.User(prisma.UserWhereUniqueInput{
+	user, _ := r.Prisma.User(prisma.UserWhereUniqueInput{
 		ID: &input.ID,
 	}).Exec(ctx)
 
 	if user.Deleted {
-		return nil, gqlerrors.NewPermissionError("user is deleted")
+		return nil, gqlerrors.NewPermissionError("user is deleted" + user.ID)
 	}
 
 	if input.PatchUser.Email != nil {
