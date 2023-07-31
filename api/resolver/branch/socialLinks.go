@@ -1,13 +1,31 @@
 package branch
 
-// func FacebookLink(ctx context.Context, obj *prisma.Branch) (*string, error) {
-// 	return nil, nil
-// }
+import (
+	"context"
 
-// func TiktokLink(ctx context.Context, obj *prisma.Branch) (*string, error) {
-// 	return nil, nil
-// }
+	"github.com/steebchen/keskin-api/prisma"
+)
 
-// func InstagramLink(ctx context.Context, obj *prisma.Branch) (*string, error) {
-// 	return nil, nil
-// }
+func (r *Branch) FacebookLink(ctx context.Context, obj *prisma.Branch) (*string, error) {
+	branch, _ := r.Prisma.Branch(prisma.BranchWhereUniqueInput{
+		ID: &obj.ID,
+	}).Exec(ctx)
+
+	return branch.FacebookLink, nil
+}
+
+func (r *Branch) TiktokLink(ctx context.Context, obj *prisma.Branch) (*string, error) {
+	branch, _ := r.Prisma.Branch(prisma.BranchWhereUniqueInput{
+		ID: &obj.ID,
+	}).Exec(ctx)
+
+	return branch.TiktokLink, nil
+}
+
+func (r *Branch) InstagramLink(ctx context.Context, obj *prisma.Branch) (*string, error) {
+	branch, _ := r.Prisma.Branch(prisma.BranchWhereUniqueInput{
+		ID: &obj.ID,
+	}).Exec(ctx)
+
+	return branch.InstagramLink, nil
+}

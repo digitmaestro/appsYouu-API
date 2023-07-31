@@ -36,6 +36,12 @@ models:
   Branch:
     model: github.com/steebchen/keskin-api/prisma.Branch
     fields:
+      facebookLink:
+        resolver: true
+      tiktokLink:
+        resolver: true
+      instagramLink:
+        resolver: true
       smtpSendHost:
         resolver: true
       smtpSendPort:
