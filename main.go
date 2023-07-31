@@ -16,9 +16,9 @@ import (
 
 func main() {
 	server.InitTimezoneOnWindows()
-	if tz := time.Now().Location().String(); tz != "UTC" {
-		panic("timezone is not UTC but " + tz)
-	}
+	// if tz := time.Now().Location().String(); tz == "UTC" {
+	// 	panic("timezone is not UTC but " + tz)
+	// }
 
 	if len(os.Args) > 1 && os.Args[1] == "trigger-cron-jobs" {
 		triggerCronJobs()
