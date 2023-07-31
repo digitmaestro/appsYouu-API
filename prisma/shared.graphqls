@@ -57,3 +57,11 @@ enum ReviewStatus {
 	APPROVED
 	REJECTED
 }
+
+"Sub Categories Are Dynamic"
+enum Category {
+	MALE
+	FEMALE
+	CHILDREN
+	ANY
+}

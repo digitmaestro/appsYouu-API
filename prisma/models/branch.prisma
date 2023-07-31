@@ -7,7 +7,7 @@ type Branch {
 	phoneNumber: String
 	welcomeMessage: LocalizedString! @relation(name: "LocalizedBranchWelcomeMessage", link: INLINE)
 	address: String
-	image: String
+	images: [String]
 	websiteUrl: String!
 	navigationLink: String
 	sharingRedirectUrl: String
