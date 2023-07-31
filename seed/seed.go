@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -42,16 +43,21 @@ func main() {
 	company1, err := c.CreateCompany(prisma.CompanyCreateInput{
 		Name: prisma.LocalizedStringCreateOneInput{
 			Create: &prisma.LocalizedStringCreateInput{
-				De: prisma.Str("Hairdesign"),
-				En: prisma.Str("Hairdesign"),
-				Tr: prisma.Str("Hairdesign"),
+				De: prisma.Str("Rahat"),
+				En: prisma.Str("Rahat"),
+				Tr: prisma.Str("Rahat"),
 			},
 		},
 		PwaShortName: prisma.LocalizedStringCreateOneInput{
 			Create: &prisma.LocalizedStringCreateInput{
-				De: prisma.Str("Hairdesign"),
-				En: prisma.Str("Hairdesign"),
-				Tr: prisma.Str("Hairdesign"),
+				De: prisma.Str("Rahat"),
+				En: prisma.Str("Rahat"),
+				Tr: prisma.Str("Rahat"),
+			},
+		},
+		Aliases: &prisma.AliasCreateManyWithoutCompanyInput{
+			Create: []prisma.AliasCreateWithoutCompanyInput{
+				{Value: "bush"},
 			},
 		},
 		PwaThemeColor:      "white",
@@ -59,7 +65,9 @@ func main() {
 	}).Exec(ctx)
 	panicIf(err)
 
-	_, err = c.CreateBranch(prisma.BranchCreateInput{
+	fmt.Printf("CompanyId: %s\n", company1.ID)
+
+	branch1, err := c.CreateBranch(prisma.BranchCreateInput{
 		Name: prisma.LocalizedStringCreateOneInput{
 			Create: &prisma.LocalizedStringCreateInput{
 				De: prisma.Str("Stuttgart"),
@@ -78,6 +86,12 @@ func main() {
 		},
 		WebsiteUrl: "https://www.appsyouu.com",
 
+		FromEmail:    prisma.Str("rahatmurtaza@gmx.com"),
+		SmtpSendHost: prisma.Str("mail.gmx.com"),
+		SmtpSendPort: prisma.Str("587"),
+		SmtpUsername: prisma.Str("rahatmurtaza@gmx.com"),
+		SmtpPassword: prisma.Str("Y7@cNznJ6$9^To"),
+
 		Company: prisma.CompanyCreateOneWithoutBranchesInput{
 			Connect: &prisma.CompanyWhereUniqueInput{
 				ID: &company1.ID,
@@ -86,10 +100,12 @@ func main() {
 	}).Exec(ctx)
 	panicIf(err)
 
+	fmt.Printf("BranchId: %s", branch1.ID)
+
 	genderMale := prisma.GenderMale
 	activated := true
 
-	_, err = c.CreateUser(prisma.UserCreateInput{
+	admin1, err := c.CreateUser(prisma.UserCreateInput{
 		FirstName:    "",
 		LastName:     "Administrator",
 		Email:        "admin@appsyouu.de",
@@ -100,6 +116,65 @@ func main() {
 		Activated:    &activated,
 	}).Exec(ctx)
 	panicIf(err)
+
+	fmt.Printf("Admin ID: %s", admin1.ID)
+
+	customer1, err := c.CreateUser(prisma.UserCreateInput{
+		FirstName:    "",
+		LastName:     "Customer",
+		Email:        "customer@appsyouu.de",
+		PasswordHash: password,
+		Type:         prisma.UserTypeCustomer,
+		PhoneNumber:  prisma.Str(""),
+		Gender:       &genderMale,
+		Activated:    &activated,
+		Company: &prisma.CompanyCreateOneWithoutUsersInput{
+			Connect: &prisma.CompanyWhereUniqueInput{
+				ID: &company1.ID,
+			},
+		},
+	}).Exec(ctx)
+	panicIf(err)
+
+	fmt.Printf("Customer1 ID: %s", customer1.ID)
+
+	employee1, err := c.CreateUser(prisma.UserCreateInput{
+		FirstName:    "",
+		LastName:     "Employee",
+		Email:        "employee@appsyouu.de",
+		PasswordHash: password,
+		Type:         prisma.UserTypeEmployee,
+		PhoneNumber:  prisma.Str(""),
+		Gender:       &genderMale,
+		Activated:    &activated,
+		Company: &prisma.CompanyCreateOneWithoutUsersInput{
+			Connect: &prisma.CompanyWhereUniqueInput{
+				ID: &company1.ID,
+			},
+		},
+	}).Exec(ctx)
+	panicIf(err)
+
+	fmt.Printf("Employee1 ID: %s", employee1.ID)
+
+	manager1, err := c.CreateUser(prisma.UserCreateInput{
+		FirstName:    "",
+		LastName:     "Manager",
+		Email:        "manager@appsyouu.de",
+		PasswordHash: password,
+		Type:         prisma.UserTypeManager,
+		PhoneNumber:  prisma.Str(""),
+		Gender:       &genderMale,
+		Activated:    &activated,
+		Company: &prisma.CompanyCreateOneWithoutUsersInput{
+			Connect: &prisma.CompanyWhereUniqueInput{
+				ID: &company1.ID,
+			},
+		},
+	}).Exec(ctx)
+	panicIf(err)
+
+	fmt.Printf("Manager1 ID: %s", manager1.ID)
 
 	_, err = c.CreateEmailTemplate(prisma.EmailTemplateCreateInput{
 		Name: "invite",
@@ -120,7 +195,7 @@ func main() {
 	}).Exec(ctx)
 	panicIf(err)
 
-	_, err = c.CreateEmailTemplate(prisma.EmailTemplateCreateInput{
+	registerTmp, err := c.CreateEmailTemplate(prisma.EmailTemplateCreateInput{
 		Name: "register",
 		Title: prisma.LocalizedStringCreateOneInput{
 			Create: &prisma.LocalizedStringCreateInput{
@@ -138,6 +213,8 @@ func main() {
 		},
 	}).Exec(ctx)
 	panicIf(err)
+
+	fmt.Printf("Register TemplateID: %s", registerTmp.ID)
 
 	_, err = c.CreateEmailTemplate(prisma.EmailTemplateCreateInput{
 		Name: "appointmentReminder",
