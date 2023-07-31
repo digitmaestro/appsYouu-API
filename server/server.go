@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -20,13 +21,13 @@ import (
 )
 
 type Config struct {
-	Port                    string   `env:"PORT" envDefault:"4000"`
+	Port                    string   `env:"PORT" envDefault:"3000"`
 	DataFolder              string   `env:"DATA_FOLDER" envDefault:"/data/images/"`
 	AllowedOrigins          []string `env:"KESKIN_ORIGIN" envDefault:"http://localhost:4000" envSeparator:";"`
-	EnableCORS              bool     `env:"ENABLE_CORS"`
+	EnableCORS              bool     `env:"ENABLE_CORS" envDefault:"true"`
 	DefaultLanguage         string   `env:"DEFAULT_LANGUAGE" envDefault:"DE"`
-	DefaultShareRedirectUrl string   `env:"DEFAULT_SHARE_REDIRECT_URL" envDefault:"https://keskin.luca-steeb.com/"`
-	HostName                string   `env:"HOST_NAME" envDefault:"keskin.luca-steeb.com"`
+	DefaultShareRedirectUrl string   `env:"DEFAULT_SHARE_REDIRECT_URL" envDefault:"http://appsyou.de/"`
+	HostName                string   `env:"HOST_NAME" envDefault:"appsyou.de"`
 	TemplateFolder          string   `env:"TEMPLATE_FOLDER" envDefault:"/templates/"`
 	GcmSenderId             string   `env:"GCM_SENDER_ID"`
 }
@@ -59,9 +60,12 @@ func (s *Server) Listen() error {
 
 	addr := ":" + s.Config.Port
 	if s.Config.EnableCORS {
+		fmt.Println("setting up cors")
 		c := cors.New(cors.Options{
-			AllowCredentials: true,
-			AllowedOrigins:   s.Config.AllowedOrigins,
+			AllowCredentials: false,
+			AllowedOrigins:   []string{"*"},
+			AllowedMethods:   []string{"*"},
+			AllowedHeaders:   []string{"POST"},
 		})
 		handler := c.Handler(&MuxHandler{s.Mux})
 		return http.ListenAndServe(addr, handler)
