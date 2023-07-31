@@ -2,6 +2,7 @@ package email_template
 
 import (
 	"context"
+	"log"
 
 	"github.com/cbroglie/mustache"
 
@@ -66,12 +67,31 @@ func SendEmailTemplate(
 		saluation = i18n.Language(ctx)["SALUTATION_FEMALE"]
 	}
 
+	aliases, err := prismaClient.Aliases(&prisma.AliasesParams{
+		Where: &prisma.AliasWhereInput{
+			Company: &prisma.CompanyWhereInput{
+				ID: &company.ID,
+			},
+		},
+	}).Exec(ctx)
+
+	if err != nil {
+		log.Printf("error no alises found for %v", company.ID)
+
+		return nil, err
+	}
+
+	var identifier string = ""
+	if len(aliases) > 0 {
+		identifier = aliases[0].Value
+	}
+
 	templateParameters := map[string]string{
 		"salutation":        saluation,
 		"lastName":          lastName,
 		"firstName":         firstName,
 		"companyName":       strings.DefaultWhenEmpty(i18n.GetLocalizedString(ctx, companyName), "appsYouu"),
-		"customerSubdomain": share.ResolveCompanyUrl(ctx, prismaClient, company.ID),
+		"customerSubdomain": share.ResolveCompanyUrl(ctx, prismaClient, identifier),
 	}
 
 	if appointmentDate != nil {
