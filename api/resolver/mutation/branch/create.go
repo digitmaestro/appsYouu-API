@@ -5,6 +5,7 @@ import (
 
 	"github.com/steebchen/keskin-api/api/permissions"
 	"github.com/steebchen/keskin-api/gqlgen"
+	"github.com/steebchen/keskin-api/gqlgen/gqlerrors"
 	"github.com/steebchen/keskin-api/i18n"
 	"github.com/steebchen/keskin-api/lib/file"
 	"github.com/steebchen/keskin-api/lib/mailchimp"
@@ -20,11 +21,22 @@ func (r *BranchMutation) CreateBranch(
 		return nil, err
 	}
 
-	imageID, err := file.MaybeUpload(input.Data.Image, true)
+	var imgIds []string = []string{}
 
-	if err != nil {
-		return nil, err
+	for _, img := range input.Data.Images {
+		id, err := file.MaybeUpload(img, true)
+		if err != nil {
+			return nil, gqlerrors.NewValidationError("error uploading pictures", "ErrorUploadingPictures")
+		}
+
+		imgIds = append(imgIds, *id)
 	}
+
+	// imageID, err := file.MaybeUpload(input.Data.Image, true)
+
+	// if err != nil {
+	// 	return nil, err
+	// }
 
 	logoID, err := file.MaybeUpload(input.Data.Logo, false)
 
@@ -36,11 +48,13 @@ func (r *BranchMutation) CreateBranch(
 	mailchimpListId := input.Data.MailchimpListID
 
 	branch, err := r.Prisma.CreateBranch(prisma.BranchCreateInput{
-		Name:               *i18n.CreateLocalizedString(ctx, &input.Data.Name),
-		PhoneNumber:        input.Data.PhoneNumber,
-		Address:            input.Data.Address,
-		WelcomeMessage:     *i18n.CreateLocalizedString(ctx, input.Data.WelcomeMessage),
-		Image:              imageID,
+		Name:           *i18n.CreateLocalizedString(ctx, &input.Data.Name),
+		PhoneNumber:    input.Data.PhoneNumber,
+		Address:        input.Data.Address,
+		WelcomeMessage: *i18n.CreateLocalizedString(ctx, input.Data.WelcomeMessage),
+		Images: &prisma.BranchCreateimagesInput{
+			Set: imgIds,
+		},
 		Logo:               logoID,
 		AppTheme:           input.Data.AppTheme,
 		SmtpSendHost:       input.Data.SMTPSendHost,

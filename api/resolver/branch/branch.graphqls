@@ -9,7 +9,7 @@ type Branch implements Node {
 	address: String
 
 	"TODO: multiple images - slot based (max 10 slots)"
-	image: Image
+	images: [Image]
 	
 	websiteUrl: String
 	navigationLink: String

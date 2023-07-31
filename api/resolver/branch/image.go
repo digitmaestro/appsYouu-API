@@ -8,6 +8,6 @@ import (
 	"github.com/steebchen/keskin-api/prisma"
 )
 
-func (r *Branch) Image(ctx context.Context, obj *prisma.Branch) (*gqlgen.Image, error) {
-	return picture.FromID(obj.Image), nil
+func (r *Branch) Images(ctx context.Context, obj *prisma.Branch) ([]*gqlgen.Image, error) {
+	return picture.FromIDsBranch(obj.Images)
 }

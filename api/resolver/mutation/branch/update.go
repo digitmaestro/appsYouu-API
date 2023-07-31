@@ -5,6 +5,7 @@ import (
 
 	"github.com/steebchen/keskin-api/api/permissions"
 	"github.com/steebchen/keskin-api/gqlgen"
+	"github.com/steebchen/keskin-api/gqlgen/gqlerrors"
 	"github.com/steebchen/keskin-api/i18n"
 	"github.com/steebchen/keskin-api/lib/file"
 	"github.com/steebchen/keskin-api/lib/mailchimp"
@@ -20,11 +21,22 @@ func (r *BranchMutation) UpdateBranch(
 		return nil, err
 	}
 
-	imageID, err := file.MaybeUpload(input.Patch.Image, true)
+	var imgIds []string = []string{}
 
-	if err != nil {
-		return nil, err
+	for _, img := range input.Patch.Images {
+		id, err := file.MaybeUpload(img, true)
+		if err != nil {
+			return nil, gqlerrors.NewValidationError("error uploading pictures", "ErrorUploadingPictures")
+		}
+
+		imgIds = append(imgIds, *id)
 	}
+
+	// imageID, err := file.MaybeUpload(input.Patch.Image, true)
+
+	// if err != nil {
+	// 	return nil, err
+	// }
 
 	logoID, err := file.MaybeUpload(input.Patch.Logo, false)
 
@@ -40,11 +52,13 @@ func (r *BranchMutation) UpdateBranch(
 			ID: &input.ID,
 		},
 		Data: prisma.BranchUpdateInput{
-			Name:               i18n.UpdateRequiredLocalizedString(ctx, input.Patch.Name),
-			PhoneNumber:        input.Patch.PhoneNumber,
-			Address:            input.Patch.Address,
-			WelcomeMessage:     i18n.UpdateRequiredLocalizedString(ctx, input.Patch.WelcomeMessage),
-			Image:              imageID,
+			Name:           i18n.UpdateRequiredLocalizedString(ctx, input.Patch.Name),
+			PhoneNumber:    input.Patch.PhoneNumber,
+			Address:        input.Patch.Address,
+			WelcomeMessage: i18n.UpdateRequiredLocalizedString(ctx, input.Patch.WelcomeMessage),
+			Images: &prisma.BranchUpdateimagesInput{
+				Set: imgIds,
+			},
 			Logo:               logoID,
 			AppTheme:           input.Patch.AppTheme,
 			SmtpSendHost:       input.Patch.SMTPSendHost,

@@ -14,6 +14,19 @@ import (
 	"github.com/steebchen/keskin-api/lib/file"
 )
 
+func FromIDsBranch(ids []string) ([]*gqlgen.Image, error) {
+	var imgs []*gqlgen.Image
+
+	for _, id := range ids {
+		imgs = append(imgs, &gqlgen.Image{
+			ID:  id,
+			URL: path.Join(file.BasePath, id),
+		})
+	}
+
+	return imgs, nil
+}
+
 // FromID returns a new image object for graphql usage
 func FromID(id *string) *gqlgen.Image {
 	if id == nil {

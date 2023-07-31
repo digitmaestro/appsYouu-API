@@ -16,7 +16,7 @@ input CreateBranchData {
 	phoneNumber: String
 	address: String
 	welcomeMessage: String
-	image: Upload
+	images: [Upload]
 	logo: Upload
 	appTheme: String
 	smtpSendHost: String

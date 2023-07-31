@@ -219,7 +219,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		templateParameters["reviewTitle"] = reviewTitle
 
 		if image == nil {
-			image = picture.FromID(branch.Image)
+			image = picture.FromID(&branch.Images[0])
 		}
 
 		templateParameters["linkUrl"] = share.ResolveShareRedirectUrl(ctx, h.Prisma, branch)

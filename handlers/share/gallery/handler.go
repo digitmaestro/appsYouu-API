@@ -107,13 +107,13 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		image = picture.FromID(appointment.BeforeImage)
 	}
 
-	templateParameters := map[string]string{
-		"reviewTitle":    "",
-		"reviewText":     "",
-		"linkUrl":        "",
-		"branchImageUrl": "",
-		"companyUrl":     share.ResolveCompanyUrlFromBranchId(ctx, h.Prisma, branch.ID),
-		"siteName":       i18n.Language(ctx)["SITE_NAME"],
+	templateParameters := map[string]interface{}{
+		"reviewTitle":     "",
+		"reviewText":      "",
+		"linkUrl":         "",
+		"branchImageUrls": []string{},
+		"companyUrl":      share.ResolveCompanyUrlFromBranchId(ctx, h.Prisma, branch.ID),
+		"siteName":        i18n.Language(ctx)["SITE_NAME"],
 	}
 
 	if branch != nil {
@@ -128,7 +128,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if image == nil {
-			image = picture.FromID(branch.Image)
+			image = picture.FromID(&branch.Images[0])
 		}
 
 		if image != nil {
