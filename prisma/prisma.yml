@@ -1,7 +1,8 @@
-# endpoint: http://localhost:4466/keskin/dev
-endpoint: http://${env:PRISMA_HOST}/keskin/${env:APP_NAMESPACE}
+endpoint: http://localhost:4467/keskin/dev
 
 datamodel:
+  - models/category.prisma
+  - models/sub-category.prisma
   - models/appointment.prisma
   - models/user.prisma
   - models/session.prisma

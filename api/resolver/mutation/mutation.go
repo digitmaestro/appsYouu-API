@@ -6,6 +6,7 @@ import (
 	"github.com/steebchen/keskin-api/api/resolver/mutation/appointment"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/auth"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/branch"
+	"github.com/steebchen/keskin-api/api/resolver/mutation/category"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/company"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/email_template"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/favorite"
@@ -15,6 +16,7 @@ import (
 	"github.com/steebchen/keskin-api/api/resolver/mutation/product"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/review"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/service"
+	"github.com/steebchen/keskin-api/api/resolver/mutation/sub_category"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/user/administrator"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/user/customer"
 	"github.com/steebchen/keskin-api/api/resolver/mutation/user/employee"
@@ -30,6 +32,8 @@ type Mutation struct {
 	*branch.BranchMutation
 	*company.CompanyMutation
 	*customer.CustomerMutation
+	*category.CategoryMutation
+	*sub_category.SubCategoryMutation
 	*employee.EmployeeMutation
 	*product.ProductMutation
 	*service.ServiceMutation
@@ -50,6 +54,8 @@ func New(
 	appointment *appointment.Appointment,
 	branch *branch.BranchMutation,
 	company *company.CompanyMutation,
+	category *category.CategoryMutation,
+	subCategory *sub_category.SubCategoryMutation,
 	customer *customer.CustomerMutation,
 	employee *employee.EmployeeMutation,
 	product *product.ProductMutation,
@@ -71,6 +77,8 @@ func New(
 		branch,
 		company,
 		customer,
+		category,
+		subCategory,
 		employee,
 		product,
 		service,
@@ -92,6 +100,8 @@ var ProviderSet = wire.NewSet(
 	appointment.New,
 	branch.New,
 	company.New,
+	category.New,
+	sub_category.New,
 	customer.New,
 	employee.New,
 	product.New,

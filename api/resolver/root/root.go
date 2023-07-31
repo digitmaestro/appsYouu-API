@@ -5,6 +5,7 @@ import (
 
 	"github.com/steebchen/keskin-api/api/resolver/appointment"
 	"github.com/steebchen/keskin-api/api/resolver/branch"
+	"github.com/steebchen/keskin-api/api/resolver/category"
 	"github.com/steebchen/keskin-api/api/resolver/company"
 	"github.com/steebchen/keskin-api/api/resolver/email_template"
 	"github.com/steebchen/keskin-api/api/resolver/favorite"
@@ -15,6 +16,7 @@ import (
 	"github.com/steebchen/keskin-api/api/resolver/query"
 	"github.com/steebchen/keskin-api/api/resolver/review"
 	"github.com/steebchen/keskin-api/api/resolver/service"
+	"github.com/steebchen/keskin-api/api/resolver/sub_category"
 	"github.com/steebchen/keskin-api/api/resolver/user"
 	"github.com/steebchen/keskin-api/gqlgen"
 	"github.com/steebchen/keskin-api/prisma"
@@ -25,6 +27,8 @@ type Resolver struct {
 	MutationResolver                *mutation.Mutation
 	QueryResolver                   *query.Query
 	UserResolver                    *user.User
+	CategoryResolver                *category.Category
+	SubCategoryResolver             *sub_category.SubCategory
 	AppointmentResolver             *appointment.Appointment
 	BranchResolver                  *branch.Branch
 	CompanyResolver                 *company.Company
@@ -44,6 +48,8 @@ func New(
 	user *user.User,
 	appointment *appointment.Appointment,
 	branch *branch.Branch,
+	category *category.Category,
+	sub_category *sub_category.SubCategory,
 	company *company.Company,
 	product *product.Product,
 	service *service.Service,
@@ -58,6 +64,8 @@ func New(
 		mutation,
 		query,
 		user,
+		category,
+		sub_category,
 		appointment,
 		branch,
 		company,
@@ -141,6 +149,14 @@ func (r *Resolver) EmailTemplate() gqlgen.EmailTemplateResolver {
 
 func (r *Resolver) ProductServiceAttribute() gqlgen.ProductServiceAttributeResolver {
 	return r.ProductServiceAttributeResolver
+}
+
+func (r *Resolver) Category() gqlgen.CategoryResolver {
+	return r.CategoryResolver
+}
+
+func (r *Resolver) SubCategory() gqlgen.SubCategoryResolver {
+	return r.SubCategoryResolver
 }
 
 var ProviderSet = wire.NewSet(

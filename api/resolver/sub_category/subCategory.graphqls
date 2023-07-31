@@ -1,0 +1,9 @@
+type SubCategory implements Node {
+    id: ID!
+    createdAt: String!
+	updatedAt: String!
+
+    name: String!
+
+    category: Category!
+}

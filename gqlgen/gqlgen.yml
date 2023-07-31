@@ -26,6 +26,11 @@ models:
     model: github.com/steebchen/keskin-api/prisma.ReviewStatus
 
   # models
+  Category:
+    model: github.com/steebchen/keskin-api/prisma.Category
+  SubCategory:
+    model: github.com/steebchen/keskin-api/prisma.SubCategory
+    
   Appointment:
     model: github.com/steebchen/keskin-api/prisma.Appointment
     fields:

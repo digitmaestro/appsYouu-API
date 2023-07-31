@@ -147,6 +147,9 @@ type Manager struct {
 	*User
 }
 
+func (Category) IsNode()    {}
+func (SubCategory) IsNode() {}
+
 func (Manager) IsNode()         {}
 func (Manager) IsIUser()        {}
 func (Manager) IsIStaff()       {}

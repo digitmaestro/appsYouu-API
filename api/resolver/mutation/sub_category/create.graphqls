@@ -1,0 +1,18 @@
+extend type Mutation {
+	createSubCategory(
+		input: CreateSubCategoryInput!
+	): CreateSubCategoryPayload!
+}
+
+input CreateSubCategoryInput {
+	data: CreateSubCategoryData!
+}
+
+input CreateSubCategoryData {
+	categoryId: ID!
+	name: String
+}
+
+type CreateSubCategoryPayload {
+	subCategory: SubCategory!
+}

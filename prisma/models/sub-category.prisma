@@ -1,0 +1,9 @@
+type SubCategory {
+	id: ID! @id
+	createdAt: DateTime! @createdAt
+	updatedAt: DateTime! @updatedAt
+
+    name: String!
+
+    category: Category! @relation(link: INLINE)
+}

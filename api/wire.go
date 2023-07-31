@@ -5,6 +5,7 @@ import (
 
 	"github.com/steebchen/keskin-api/api/resolver/appointment"
 	"github.com/steebchen/keskin-api/api/resolver/branch"
+	"github.com/steebchen/keskin-api/api/resolver/category"
 	"github.com/steebchen/keskin-api/api/resolver/company"
 	"github.com/steebchen/keskin-api/api/resolver/email_template"
 	"github.com/steebchen/keskin-api/api/resolver/favorite"
@@ -16,15 +17,17 @@ import (
 	"github.com/steebchen/keskin-api/api/resolver/review"
 	"github.com/steebchen/keskin-api/api/resolver/root"
 	"github.com/steebchen/keskin-api/api/resolver/service"
+	"github.com/steebchen/keskin-api/api/resolver/sub_category"
 	"github.com/steebchen/keskin-api/api/resolver/user"
 )
 
 var ProviderSet = wire.NewSet(
 	query.ProviderSet,
 	mutation.ProviderSet,
-
 	appointment.ProviderSet,
 	branch.ProviderSet,
+	category.ProviderSet,
+	sub_category.ProviderSet,
 	company.ProviderSet,
 	user.ProviderSet,
 	product.ProviderSet,
@@ -34,8 +37,6 @@ var ProviderSet = wire.NewSet(
 	news.ProviderSet,
 	email_template.ProviderSet,
 	product_service_attribute.ProviderSet,
-
 	root.ProviderSet,
-
 	New,
 )

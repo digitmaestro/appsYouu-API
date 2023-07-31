@@ -5,6 +5,7 @@ import (
 
 	"github.com/steebchen/keskin-api/api/resolver/query/appointment"
 	"github.com/steebchen/keskin-api/api/resolver/query/branch"
+	"github.com/steebchen/keskin-api/api/resolver/query/category"
 	"github.com/steebchen/keskin-api/api/resolver/query/company"
 	"github.com/steebchen/keskin-api/api/resolver/query/customer"
 	"github.com/steebchen/keskin-api/api/resolver/query/email_template"
@@ -16,6 +17,7 @@ import (
 	"github.com/steebchen/keskin-api/api/resolver/query/review"
 	"github.com/steebchen/keskin-api/api/resolver/query/service"
 	"github.com/steebchen/keskin-api/api/resolver/query/staff"
+	"github.com/steebchen/keskin-api/api/resolver/query/sub_category"
 	"github.com/steebchen/keskin-api/api/resolver/query/timeslots"
 	"github.com/steebchen/keskin-api/prisma"
 )
@@ -25,6 +27,8 @@ type Query struct {
 	*appointment.AppointmentQuery
 	*branch.BranchQuery
 	*customer.CustomerQuery
+	*category.CategoryQuery
+	*sub_category.SubCategoryQuery
 	*employee.EmployeeQuery
 	*product.ProductQuery
 	*service.ServiceQuery
@@ -43,6 +47,8 @@ func New(
 	appointment *appointment.AppointmentQuery,
 	branch *branch.BranchQuery,
 	customer *customer.CustomerQuery,
+	category *category.CategoryQuery,
+	sub_category *sub_category.SubCategoryQuery,
 	employee *employee.EmployeeQuery,
 	product *product.ProductQuery,
 	service *service.ServiceQuery,
@@ -60,6 +66,8 @@ func New(
 		appointment,
 		branch,
 		customer,
+		category,
+		sub_category,
 		employee,
 		product,
 		service,
@@ -80,6 +88,8 @@ var ProviderSet = wire.NewSet(
 	branch.New,
 	customer.New,
 	employee.New,
+	category.New,
+	sub_category.New,
 	product.New,
 	service.New,
 	staff.New,
